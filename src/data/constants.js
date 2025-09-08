@@ -1,5 +1,12 @@
 // Portfolio Data Constants
 // Replace this dummy data with your actual information
+import { 
+  mihirPhoto, 
+  backgroundImage, 
+  cashiraImage, 
+  vocaprepImage, 
+  amiokayImage
+} from '@/assets/images';
 
 export const PERSONAL_INFO = {
   name: "Mihir Gupta",
@@ -10,9 +17,9 @@ export const PERSONAL_INFO = {
   email: "mihirgupta0712@gmail.com",
   phone: "", // optional – add if you want it public
   location: "Bengaluru, India",
-  avatar: "/Mihir_Photo.jpg", // Replace with your actual photo
-  about_image: "/Background.jpg", // Replace with your actual photo
-  resume: "/resume.pdf", // Replace with your resume file path
+  avatar: mihirPhoto, // Replace with your actual photo
+  about_image: backgroundImage, // Replace with your actual photo
+  resume: "./resume.pdf", // Replace with your resume file path
 };
 
 export const SOCIAL_LINKS = {
@@ -69,7 +76,7 @@ export const PROJECTS = [
     title: "Cashira - Money Tracking PWA",
     description:
       "A modern progressive web app to track expenses with category grids, charts, and Firebase authentication.",
-    image: "/cashira.png",
+    image: cashiraImage,
     technologies: ["Next.js", "Firebase", "Firestore", "Tailwind CSS"],
     liveUrl: "https://cashira.vercel.app", 
     githubUrl: "https://github.com/MihirGupta07/cashira",
@@ -80,7 +87,7 @@ export const PROJECTS = [
     title: "Vocaprep - English Language Learning App",
     description:
       "A PWA for learning English language with flashcards, for competitive exams like GMAT, GRE, TOEFL, IELTS, etc.",
-    image: "/vocaprep.png",
+    image: vocaprepImage,
     technologies: ["React.js", "Framer Motion", "PWA", "Tailwind CSS"],
     liveUrl: "https://voca-prep.vercel.app/", 
     githubUrl: "https://github.com/MihirGupta07/VocaPrep",
@@ -91,7 +98,7 @@ export const PROJECTS = [
     title: "AmIOkay - Self Diagnosis App using Machine Learning",
     description:
       "An online disease predictor can also suggest medicines and nearby hospitals based on the three symptoms.",
-    image: "/amiokay.png",
+    image: amiokayImage,
     technologies: ["HTML", "Tailwind CSS", "Flask", "Machine Learning"],
     liveUrl: "https://devpost.com/software/amiok", 
     githubUrl: "https://github.com/suhaasbadada/amiokay",
