@@ -5,10 +5,12 @@ import backgroundImage from './Background.jpg';
 import cashiraImage from './cashira.png';
 import vocaprepImage from './vocaprep.png';
 import amiokayImage from './amiokay.png';
+import resumePdf from './resume.pdf';
 export {
   mihirPhoto,
   backgroundImage,
   cashiraImage,
   vocaprepImage,
-  amiokayImage
+  amiokayImage,
+  resumePdf
 };

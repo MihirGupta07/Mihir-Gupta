@@ -5,7 +5,8 @@ import {
   backgroundImage, 
   cashiraImage, 
   vocaprepImage, 
-  amiokayImage
+  amiokayImage,
+  resumePdf
 } from '@/assets/images';
 
 export const PERSONAL_INFO = {
@@ -19,7 +20,7 @@ export const PERSONAL_INFO = {
   location: "Bengaluru, India",
   avatar: mihirPhoto, // Replace with your actual photo
   about_image: backgroundImage, // Replace with your actual photo
-  resume: "./resume.pdf", // Replace with your resume file path
+  resume: resumePdf, // Replace with your resume file path
 };
 
 export const SOCIAL_LINKS = {
