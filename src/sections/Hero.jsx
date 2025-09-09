@@ -67,7 +67,7 @@ const Hero = () => {
         
 
           {/* Greeting */}
-          <motion.div variants={staggerItem} className="mb-6 mt-10">
+          <motion.div variants={staggerItem} className="mb-6 mt-[15vh]">
             <motion.span
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
