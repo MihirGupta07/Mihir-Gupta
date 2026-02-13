@@ -84,7 +84,7 @@ const Skills = () => {
           {/* Section Header */}
           <motion.div variants={staggerItem} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
-              Skills & <span className="gradient-text">Expertise</span>
+              <span className="gradient-text">Skills & Expertise</span>
             </h2>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
               A comprehensive overview of my technical skills and the tools I use to bring ideas to life.

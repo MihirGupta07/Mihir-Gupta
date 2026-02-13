@@ -161,7 +161,7 @@ const Projects = () => {
           {/* Section Header */}
           <motion.div variants={staggerItem} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
-              Featured <span className="gradient-text">Projects</span>
+              <span className="gradient-text">Featured Projects</span>
             </h2>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
               A showcase of my recent work. Each project represents a unique challenge and demonstrates 

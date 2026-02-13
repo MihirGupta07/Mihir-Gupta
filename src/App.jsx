@@ -8,7 +8,7 @@ import Projects from '@/sections/Projects';
 import Experience from '@/sections/Experience';
 import Research from '@/sections/Research';
 import Contact from '@/sections/Contact';
-import Particles from '@/components/ui/Particles';
+import ThemeParticles from '@/components/ui/ThemeParticles';
 import { pageVariants, pageTransition } from '@/utils/animations';
 
 function App() {
@@ -123,12 +123,11 @@ function App() {
         className="min-h-screen relative"
       >
         {/* Global Particles Background */}
-        <Particles 
+        <ThemeParticles 
           count={380}
-          colors={['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b']}
           speed={1.5}
           size={{ min: 1, max: 5 }}
-          opacity={{ min: 0.5, max: 0.8 }}
+          opacity={{ min: 0.4, max: 0.7 }}
           className="fixed inset-0 z-0"
         />
         

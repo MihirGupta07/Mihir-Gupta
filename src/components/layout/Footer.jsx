@@ -105,10 +105,9 @@ const Footer = () => {
           variants={fadeInUp}
           className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0"
         >
-          <div className="flex items-center space-x-2 text-sm text-neutral-600 dark:text-neutral-400">
-            <span>© {currentYear} {PERSONAL_INFO.name}. Made with</span>
-            <Heart size={16} className="text-red-500 fill-current" />
-            <span>and lots of ☕</span>
+          <div className="flex flex-col   text-sm text-neutral-600 dark:text-neutral-400">
+            <span>Updated <span className="gradient-text">{currentYear}</span> by <span className="gradient-text">{PERSONAL_INFO.name}</span> </span>
+            <span>Made with ❤️, a little bit of <span className="gradient-text">Vibe Coding</span>, and lots of <span className="gradient-text">Coffee</span> ☕</span>
           </div>
           
           <div className="flex items-center space-x-6 text-sm text-neutral-600 dark:text-neutral-400">

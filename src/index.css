@@ -3,6 +3,30 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light mode theme colors - Vibrant Teal/Blue/Purple */
+  :root {
+    --theme-primary-from: #14b8a6;
+    --theme-primary-via: #3b82f6;
+    --theme-primary-to: #8b5cf6;
+    --particle-color-1: #14b8a6;
+    --particle-color-2: #06b6d4;
+    --particle-color-3: #3b82f6;
+    --particle-color-4: #6366f1;
+    --particle-color-5: #8b5cf6;
+  }
+  
+  /* Dark mode theme colors - Soft Mint/Sky Pastel */
+  .dark {
+    --theme-primary-from: #a7f3d0;
+    --theme-primary-via: #bfdbfe;
+    --theme-primary-to: #ddd6fe;
+    --particle-color-1: #e3ffe7;
+    --particle-color-2: #d9e7ff;
+    --particle-color-3: #a7f3d0;
+    --particle-color-4: #bfdbfe;
+    --particle-color-5: #ddd6fe;
+  }
+  
   * {
     @apply border-neutral-200 dark:border-neutral-700;
   }
@@ -44,7 +68,10 @@
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent;
+    background: linear-gradient(to right, var(--theme-primary-from), var(--theme-primary-via), var(--theme-primary-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   
   .glass-effect {
