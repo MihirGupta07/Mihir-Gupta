@@ -11,10 +11,10 @@ import {
 
 export const PERSONAL_INFO = {
   name: "Mihir Gupta",
-  title: "Software Engineer",
-  tagline: "Building scalable solutions with React.js & Next.js",
+  title: "Freelance Full Stack Developer",
+  tagline: "I build fast, polished web products — from MVP to production.",
   description:
-    "I'm a passionate software engineer and founding engineer at multiple startups, with experience in building scalable, impactful web applications from the ground up. Skilled in React.js, Next.js, Golang, Node.js, and cloud pipelines, I thrive at the intersection of product vision and technical execution. I've also published research in AI-driven encryption and healthcare risk prediction.",
+    "I'm a freelance full-stack developer with 3+ years of experience helping startups and founders ship high-quality web applications. Specialising in React.js, Next.js, Golang, and Node.js, I work closely with clients to turn ideas into scalable products — on time and on budget. I've been a founding engineer at two startups and have published research in AI and machine learning.",
   email: "mihirgupta0712@gmail.com",
   phone: "", // optional – add if you want it public
   location: "Bengaluru, India",
@@ -212,7 +212,7 @@ export const CONTACT_INFO = {
   email: "mihirgupta0712@gmail.com",
   phone: "",
   location: "Bengaluru, India",
-  availability: "Open to exciting opportunities",
+  availability: "Available for freelance projects",
   response_time: "Usually responds within 24 hours",
 };
 

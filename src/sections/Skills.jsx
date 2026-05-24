@@ -66,7 +66,7 @@ const Skills = () => {
   );
 
   return (
-    <section id="skills" className="relative section-padding bg-gradient-to-r from-neutral-50 via-white to-primary-50/30 dark:from-neutral-950 dark:via-neutral-900 dark:to-primary-950/30 overflow-hidden">
+    <section id="skills" className="relative section-padding overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-40 dark:opacity-20 z-0">
         <div className="absolute inset-0" style={{

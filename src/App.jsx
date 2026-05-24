@@ -8,7 +8,7 @@ import Projects from '@/sections/Projects';
 import Experience from '@/sections/Experience';
 import Research from '@/sections/Research';
 import Contact from '@/sections/Contact';
-import ThemeParticles from '@/components/ui/ThemeParticles';
+import InfiniteGrid from '@/components/ui/InfiniteGrid';
 import { pageVariants, pageTransition } from '@/utils/animations';
 
 function App() {
@@ -122,14 +122,8 @@ function App() {
         transition={pageTransition}
         className="min-h-screen relative"
       >
-        {/* Global Particles Background */}
-        <ThemeParticles 
-          count={380}
-          speed={1.5}
-          size={{ min: 1, max: 5 }}
-          opacity={{ min: 0.4, max: 0.7 }}
-          className="fixed inset-0 z-0"
-        />
+        {/* Global Infinite Grid Background */}
+        <InfiniteGrid />
         
         <Layout>
           {/* Hero Section */}

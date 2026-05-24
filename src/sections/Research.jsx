@@ -143,7 +143,7 @@ const Research = () => {
   );
 
   return (
-    <section id="research" className="relative section-padding bg-white dark:bg-neutral-900 overflow-hidden">
+    <section id="research" className="relative section-padding overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-30 dark:opacity-10 z-0">
         <div className="absolute inset-0" style={{

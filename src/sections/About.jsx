@@ -8,14 +8,7 @@ import AnimatedGrid from '@/components/ui/AnimatedGrid';
 
 const About = () => {
   return (
-    <section id="about" className="relative section-padding bg-gradient-to-r from-neutral-50 via-white to-primary-50/30 dark:from-neutral-950 dark:via-neutral-900 dark:to-primary-950/30 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-40 dark:opacity-20 z-0">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233b82f6' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
-      
+    <section id="about" className="relative section-padding overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           variants={staggerContainer}
