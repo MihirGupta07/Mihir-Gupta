@@ -126,7 +126,7 @@ const Contact = () => {
       });
     } catch (error) {
       console.error('EmailJS error:', error);
-      toast.error('Failed to send message. Please try again or contact me directly.');
+      toast.error('Failed to send message. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -143,7 +143,7 @@ const Contact = () => {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: 'Connect with me',
+      value: 'Connect with us',
       href: SOCIAL_LINKS.linkedin,
       color: 'from-blue-600 to-blue-700',
     },
@@ -179,7 +179,7 @@ const Contact = () => {
             </h2>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
               Have a project in mind or just want to chat? I'd love to hear from you. 
-              Send me a message and I'll respond as soon as possible.
+              Send us a message and we'll respond as soon as possible.
             </p>
           </motion.div>
 
@@ -242,7 +242,7 @@ const Contact = () => {
               {/* Social Links */}
               <motion.div variants={fadeInUp}>
                 <h4 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4">
-                  Follow Me
+                  Follow Us
                 </h4>
                 <div className="flex space-x-4">
                   {Object.entries(SOCIAL_LINKS).filter(([platform, url]) => url && url.trim() !== '').slice(0, 4).map(([platform, url]) => {
@@ -307,7 +307,7 @@ const Contact = () => {
                   <Textarea
                     label="Message"
                     name="message"
-                    placeholder="Tell me about your project or just say hello..."
+                    placeholder="Tell us about your project or just say hello..."
                     rows={6}
                     value={formData.message}
                     onChange={handleInputChange}
@@ -353,7 +353,7 @@ const Contact = () => {
                     What's your typical response time?
                   </h4>
                   <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    I usually respond to emails within 24 hours, often much sooner during business hours.
+                    We usually respond to emails within 24 hours, often much sooner during business hours.
                   </p>
                 </div>
                 
@@ -362,7 +362,7 @@ const Contact = () => {
                     Are you available for freelance projects?
                   </h4>
                   <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    Yes! I'm always interested in discussing new opportunities and exciting projects.
+                    Yes! We're always interested in discussing new opportunities and exciting projects.
                   </p>
                 </div>
                 
@@ -380,7 +380,7 @@ const Contact = () => {
                     Do you offer consultation services?
                   </h4>
                   <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    Absolutely! I provide technical consulting and code reviews for teams and individual developers.
+                    Absolutely! We provide technical consulting and code reviews for teams and individual developers.
                   </p>
                 </div>
               </AnimatedGrid>

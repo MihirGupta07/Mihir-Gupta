@@ -19,10 +19,10 @@ const About = () => {
           {/* Section Header */}
           <motion.div variants={staggerItem} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
-             <span className="gradient-text"> About Me</span>
+             <span className="gradient-text"> About Us</span>
             </h2>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-              Get to know the person behind the code. I'm passionate about creating digital experiences that make a difference.
+              Boutique studio attention with the output of a full team. Here's who you're working with.
             </p>
           </motion.div>
 
@@ -102,15 +102,13 @@ const About = () => {
               {/* Main Description */}
               <div className="space-y-4">
                 <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
-                  Crafting Digital Solutions
+                  Your Engineering Partner
                 </h3>
                 <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
                   {PERSONAL_INFO.description}
                 </p>
                 <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, 
-                  or sharing my knowledge through blog posts and mentoring. I believe in continuous learning and 
-                  staying up-to-date with the latest industry trends.
+                  We operate as a lean studio, One clear point of contact, with trusted collaborators brought in when the scope demands it. No traditional agency overhead. From a quick audit to a full product build, the process stays tight and the quality stays high.
                 </p>
               </div>
 
@@ -123,11 +121,10 @@ const About = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
-                        My Journey
+                        Founded-Engineer Background
                       </h4>
                       <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                        Started my development journey in 2020, quickly fell in love with React and the JS/TS ecosystem. 
-                        Since then, I've worked on diverse projects ranging from e-commerce platforms to real-time applications.
+                        Twice a founding engineer. We've built products from zero to production and know what it takes to ship fast without cutting corners. That startup mindset shapes every client engagement.
                       </p>
                     </div>
                   </div>
@@ -137,7 +134,7 @@ const About = () => {
               {/* Fun Facts */}
               <div>
                 <h4 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-4">
-                  Fun Facts About Me
+                  Why Work With Us
                 </h4>
                 <AnimatedGrid columns={{ sm: 1, md: 2, lg: 2 }} gap={3}>
                   {FUN_FACTS.map((fact, index) => (
@@ -164,7 +161,7 @@ const About = () => {
                     </div>
                     <div>
                       <span className="text-green-700 dark:text-green-300 font-medium">
-                        Always on the hunt for new ideas and projects
+                        Currently taking on new projects. Let's talk
                       </span>
                     </div>
                   </div>

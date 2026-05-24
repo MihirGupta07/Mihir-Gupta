@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Download, ExternalLink, Github } from 'lucide-react';
+import { ArrowDown, ExternalLink, Github, Mail } from 'lucide-react';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/data/constants';
 import { smoothScrollTo } from '@/utils/helpers';
 import { fadeInUp, fadeInDown, staggerContainer, staggerItem, bounceIn } from '@/utils/animations';
@@ -8,11 +8,11 @@ import Button from '@/components/ui/Button';
 
 const Hero = () => {
   const handleScrollDown = () => {
-    smoothScrollTo('about');
+    smoothScrollTo('projects');
   };
 
-  const handleDownloadResume = () => {
-    window.open(PERSONAL_INFO.resume, '_blank');
+  const handleStartProject = () => {
+    smoothScrollTo('contact');
   };
 
   const handleViewProjects = () => {
@@ -67,8 +67,8 @@ const Hero = () => {
               transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-base font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 mb-4"
             >
-              <span className="animate-pulse">🚀</span>
-              Available for freelance work
+              <span className="animate-pulse">🟢</span>
+              Taking on new projects
             </motion.span>
           </motion.div>
 
@@ -103,21 +103,21 @@ const Hero = () => {
           >
             <Button
               size="lg"
-              onClick={handleViewProjects}
-              icon={<ExternalLink />}
+              onClick={handleStartProject}
+              icon={<Mail />}
               className="w-full sm:w-auto"
             >
-              View My Work
+              Start a Project
             </Button>
 
             <Button
               variant="secondary"
               size="lg"
-              onClick={handleDownloadResume}
-              icon={<Download />}
+              onClick={handleViewProjects}
+              icon={<ExternalLink />}
               className="w-full sm:w-auto"
             >
-              Download CV
+              View Our Work
             </Button>
           </motion.div>
 

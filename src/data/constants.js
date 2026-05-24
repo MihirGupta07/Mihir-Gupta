@@ -6,21 +6,24 @@ import {
   cashiraImage, 
   vocaprepImage, 
   amiokayImage,
-  resumePdf
+  resumePdf, 
+  kairosImage,
+  qestraImage,
+  wrapshareImage
 } from '@/assets/images';
 
 export const PERSONAL_INFO = {
   name: "Mihir Gupta",
-  title: "Freelance Full Stack Developer",
-  tagline: "I build fast, polished web products — from MVP to production.",
+  title: "Full Stack Development Studio",
+  tagline: "Fast, polished web products. From idea to production.",
   description:
-    "I'm a freelance full-stack developer with 3+ years of experience helping startups and founders ship high-quality web applications. Specialising in React.js, Next.js, Golang, and Node.js, I work closely with clients to turn ideas into scalable products — on time and on budget. I've been a founding engineer at two startups and have published research in AI and machine learning.",
+    "We're a boutique full-stack studio with 3+ years of experience building products for startups and founders. We operate lean. One clear point of contact, trusted collaborators brought in when the scope demands it. Specialising in React.js, Next.js, Golang, and Node.js, with founding-engineer experience at two startups and published research in AI and machine learning.",
   email: "mihirgupta0712@gmail.com",
   phone: "", // optional – add if you want it public
   location: "Bengaluru, India",
-  avatar: mihirPhoto, // Replace with your actual photo
-  about_image: backgroundImage, // Replace with your actual photo
-  resume: resumePdf, // Replace with your resume file path
+  avatar: mihirPhoto,
+  about_image: backgroundImage,
+  resume: resumePdf,
 };
 
 export const SOCIAL_LINKS = {
@@ -35,11 +38,9 @@ export const SOCIAL_LINKS = {
 
 export const NAVIGATION = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
-  { name: "Research", href: "#research" },
+  { name: "Services", href: "#services" },
+  { name: "About", href: "#about" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -85,6 +86,17 @@ export const PROJECTS = [
   },
   {
     id: 2,
+    title: "Kairos - AI Powered Sales Objection Tracker",
+    description:
+      "AI Powered Sales Objection Tracker that captures every objection across every meeting, Zoom calls, field visits, voice memos, clusters them with AI, and tells you exactly what to do about it.",
+    image: kairosImage,
+    technologies: ["Next.js","Framer Motion", "MongoDB", "Tailwind CSS", "OpenAI", "Anthropic"],
+    liveUrl: "https://gokairos.vercel.app", 
+    // githubUrl: "https://github.com/MihirGupta07/kairos",
+    featured: true,
+  },
+  {
+    id: 3,
     title: "Vocaprep - English Language Learning App",
     description:
       "A PWA for learning English language with flashcards, for competitive exams like GMAT, GRE, TOEFL, IELTS, etc.",
@@ -95,17 +107,88 @@ export const PROJECTS = [
     featured: true,
   },
   {
-    id: 3,
+    id: 4,
     title: "AmIOkay - Self Diagnosis App using Machine Learning",
     description:
       "An online disease predictor can also suggest medicines and nearby hospitals based on the three symptoms.",
     image: amiokayImage,
     technologies: ["HTML", "Tailwind CSS", "Flask", "Machine Learning"],
-    liveUrl: "https://devpost.com/software/amiok", 
+    liveUrl: "https://devpost.com/software/amiok",
     githubUrl: "https://github.com/suhaasbadada/amiokay",
     featured: true,
   },
-
+  {
+    id: 5,
+    title: "Qestra - AI Agent Runner",
+    description:
+      "Self-hostable agent runner that executes iterative LLM/tool loops with human approval gates for sensitive actions. Supports multiple LLM providers, sandboxed tool execution, per-agent budget caps, and a Next.js management dashboard.",
+    image: qestraImage,
+    emoji: "🤖",
+    technologies: ["Next.js", "TypeScript", "OpenAI", "Anthropic" , "Open Source"],
+    liveUrl: "https://qestra.vercel.app",
+    githubUrl: "https://github.com/MihirGupta07/Qestra",
+    featured: true,
+  },
+  {
+    id: 6,
+    title: "WrapShare - Spotify Stats Anytime",
+    description:
+      "Generate beautiful, shareable Spotify listening visualisations weekly or monthly — no waiting for annual Wrapped. Multiple themes, story-ready 9:16 formats, and Razorpay-powered subscriptions.",
+    image: wrapshareImage,
+    emoji: "🎵",
+    technologies: ["Next.js", "Supabase", "Puppeteer", "Razorpay"],
+    liveUrl: "",
+    githubUrl: "https://github.com/MihirGupta07/wrapshare",
+    featured: false,
+  },
+  {
+    id: 7,
+    title: "Skribbl.io Clone - Multiplayer Drawing Game",
+    description:
+      "Real-time multiplayer drawing and guessing game with room creation, live chat, guess detection, and a scoring system. Mobile-optimised and fully playable in the browser.",
+    image: null,
+    emoji: "🎨",
+    technologies: ["Next.js", "TypeScript", "Socket.IO", "Firebase"],
+    liveUrl: "",
+    githubUrl: "https://github.com/MihirGupta07/skribblio-clone",
+    featured: false,
+  },
+  {
+    id: 8,
+    title: "MindfulYouth - Mental Health Platform",
+    description:
+      "Full-stack mental wellness platform for young people, featuring resources and support tools built with Next.js, TypeScript, and PostgreSQL.",
+    image: null,
+    emoji: "🧠",
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
+    liveUrl: "https://mindfulyouth-olive.vercel.app",
+    githubUrl: "https://github.com/MihirGupta07/MindfulYouth",
+    featured: false,
+  },
+  {
+    id: 9,
+    title: "ScytheChat - Encrypted Group Chat",
+    description:
+      "Web-based group chat app with invite-code rooms and end-to-end encrypted messages stored in Cloud Firestore. Sign in with Google and chat securely.",
+    image: null,
+    emoji: "🔐",
+    technologies: ["React.js", "Firebase", "Firestore", "Google Auth"],
+    liveUrl: "https://scythechat-70f85.web.app/",
+    githubUrl: "https://github.com/MihirGupta07/ScytheChat",
+    featured: false,
+  },
+  {
+    id: 10,
+    title: "isMyFlightDelayed - Flight Status Checker",
+    description:
+      "Web app that lets travellers instantly check whether their flight is delayed, with a clean React frontend and live flight data API.",
+    image: null,
+    emoji: "✈️",
+    technologies: ["React.js", "Vite", "REST APIs", "Tailwind CSS"],
+    liveUrl: "https://ismyflightdelayed.vercel.app",
+    githubUrl: "https://github.com/MihirGupta07/isMyFlightDelayed",
+    featured: false,
+  },
 ];
 
 export const EXPERIENCE = [
@@ -208,11 +291,42 @@ export const RESEARCH = [
 ];
 
 
+export const SERVICES = [
+  {
+    id: 1,
+    icon: "🚀",
+    title: "MVP Development",
+    description: "Turn your idea into a working product. We move fast, ship quality, and help founders validate before scaling.",
+    bullets: ["Full-stack build from zero", "Launch in weeks, not months", "Built to scale when you're ready"],
+  },
+  {
+    id: 2,
+    icon: "🔍",
+    title: "Tech Consulting & Audits",
+    description: "An expert set of eyes on your codebase, architecture, or product strategy before you make costly decisions.",
+    bullets: ["Code & architecture reviews", "Performance audits", "Technology stack advice"],
+  },
+  {
+    id: 3,
+    icon: "🔄",
+    title: "Ongoing Retainer",
+    description: "Your on-call engineering partner. Monthly dev bandwidth for feature development, maintenance, and scaling.",
+    bullets: ["Dedicated monthly hours", "Feature development", "Priority support & maintenance"],
+  },
+  {
+    id: 4,
+    icon: "🎨",
+    title: "Design + Development",
+    description: "UI/UX design paired with production-quality code. One partner handles it all, no coordination overhead.",
+    bullets: ["UI/UX design in Figma", "Pixel-perfect implementation", "Responsive & accessible"],
+  },
+];
+
 export const CONTACT_INFO = {
   email: "mihirgupta0712@gmail.com",
   phone: "",
   location: "Bengaluru, India",
-  availability: "Available for freelance projects",
+  availability: "Taking on new projects",
   response_time: "Usually responds within 24 hours",
 };
 
@@ -223,18 +337,18 @@ export const EMAIL_CONFIG = {
   publicKey: "UE30mayPn_gb9geGg",
 };
 
-// Fun facts for the About section
+// Why Work With Me — shown in About section
 export const FUN_FACTS = [
-  "☕ Powered by coffee and curiosity",
-  "🎮 Gaming enthusiast in spare time",
-  "📚 Always learning new technologies",
-  "🎵 Music producer as a hobby",
+  "🚀 Shipped 20+ production products",
+  "🤝 Direct, no-middleman communication",
+  "⚡ Fast turnarounds without quality cuts",
+  "🎵 Music producer on the side",
 ];
 
 // Statistics for the About section
 export const STATS = [
   { label: "Years of Experience", value: "3+" },
-  { label: "Projects Completed", value: "20+" },
-  { label: "Research Papers Published", value: "2" },
+  { label: "Projects Delivered", value: "20+" },
+  { label: "Startups Served", value: "5+" },
   { label: "Code Commits", value: "2000+" },
 ];

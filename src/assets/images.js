@@ -6,11 +6,18 @@ import cashiraImage from './cashira.png';
 import vocaprepImage from './vocaprep.png';
 import amiokayImage from './amiokay.png';
 import resumePdf from './resume.pdf';
+import kairosImage from './kairos.png';
+import qestraImage from './qestra.png';
+import wrapshareImage from './wrapshare.png';
 export {
   mihirPhoto,
   backgroundImage,
   cashiraImage,
   vocaprepImage,
   amiokayImage,
-  resumePdf
+  resumePdf,
+  kairosImage,
+  qestraImage,
+  wrapshareImage
+
 };

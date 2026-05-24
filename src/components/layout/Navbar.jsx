@@ -10,7 +10,7 @@ import Button from '@/components/ui/Button';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const activeSection = useScrollSpy(['home', 'about', 'skills', 'projects', 'experience', 'contact']);
+  const activeSection = useScrollSpy(['home', 'projects', 'services', 'about', 'contact']);
 
   useEffect(() => {
     const handleScroll = () => {

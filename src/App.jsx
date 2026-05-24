@@ -3,11 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
 import Hero from '@/sections/Hero';
 import About from '@/sections/About';
-import Skills from '@/sections/Skills';
 import Projects from '@/sections/Projects';
 import Experience from '@/sections/Experience';
-import Research from '@/sections/Research';
 import Contact from '@/sections/Contact';
+import Services from '@/sections/Services';
 import InfiniteGrid from '@/components/ui/InfiniteGrid';
 import { pageVariants, pageTransition } from '@/utils/animations';
 
@@ -129,21 +128,20 @@ function App() {
           {/* Hero Section */}
           <Hero />
           
-          {/* About Section */}
-          <About />
-          
-          {/* Skills Section */}
-          <Skills />
-          
           {/* Projects Section */}
           <Projects />
           
+          {/* Services Section */}
+          <Services />
+
+          {/* About Section */}
+          <About />
+
+      
+          
           {/* Experience Section */}
-          <Experience />
-          
-          {/* Research Section */}
-          <Research />
-          
+          {/* <Experience /> */}
+
           {/* Contact Section */}
           <Contact />
         </Layout>

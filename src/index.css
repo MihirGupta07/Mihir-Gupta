@@ -3,28 +3,28 @@
 @tailwind utilities;
 
 @layer base {
-  /* Light mode theme colors - Vibrant Teal/Blue/Purple */
+  /* Light mode theme colors - Cyan/Purple */
   :root {
-    --theme-primary-from: #14b8a6;
-    --theme-primary-via: #3b82f6;
-    --theme-primary-to: #8b5cf6;
-    --particle-color-1: #14b8a6;
+    --theme-primary-from: #06b6d4;
+    --theme-primary-via: #a855f7;
+    --theme-primary-to: #7e22ce;
+    --particle-color-1: #22d3ee;
     --particle-color-2: #06b6d4;
-    --particle-color-3: #3b82f6;
-    --particle-color-4: #6366f1;
-    --particle-color-5: #8b5cf6;
+    --particle-color-3: #c084fc;
+    --particle-color-4: #a855f7;
+    --particle-color-5: #7e22ce;
   }
-  
-  /* Dark mode theme colors - Soft Mint/Sky Pastel */
+
+  /* Dark mode theme colors - Soft Cyan/Purple Pastel */
   .dark {
-    --theme-primary-from: #a7f3d0;
-    --theme-primary-via: #bfdbfe;
-    --theme-primary-to: #ddd6fe;
-    --particle-color-1: #e3ffe7;
-    --particle-color-2: #d9e7ff;
-    --particle-color-3: #a7f3d0;
-    --particle-color-4: #bfdbfe;
-    --particle-color-5: #ddd6fe;
+    --theme-primary-from: #a5f3fc;
+    --theme-primary-via: #d8b4fe;
+    --theme-primary-to: #e9d5ff;
+    --particle-color-1: #cffafe;
+    --particle-color-2: #a5f3fc;
+    --particle-color-3: #e9d5ff;
+    --particle-color-4: #d8b4fe;
+    --particle-color-5: #c084fc;
   }
   
   * {

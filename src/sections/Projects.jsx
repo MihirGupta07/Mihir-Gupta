@@ -9,63 +9,48 @@ import Badge from '@/components/ui/Badge';
 import AnimatedGrid from '@/components/ui/AnimatedGrid';
 import { SOCIAL_LINKS } from '../data/constants';
 
-const Projects = () => {
-  const [filter, setFilter] = useState('all');
-  const [visibleProjects, setVisibleProjects] = useState(6);
-
-  // Get all unique technologies for filter
-  const allTechnologies = [...new Set(PROJECTS.flatMap(project => project.technologies))];
-  
-  // Filter projects based on selected filter
-  const filteredProjects = filter === 'all' 
-    ? PROJECTS 
-    : PROJECTS.filter(project => 
-        project.technologies.some(tech => 
-          tech.toLowerCase().includes(filter.toLowerCase())
-        )
-      );
-
-  const featuredProjects = PROJECTS.filter(project => project.featured);
-
-  const handleLoadMore = () => {
-    setVisibleProjects(prev => prev + 3);
-  };
-
-  const ProjectCard = ({ project, index }) => (
-    <motion.div
-      variants={staggerItem}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="group h-full"
-    >
-      <Card hover className="h-full overflow-hidden">
-        {/* Project Image */}
-        <div className="relative overflow-hidden rounded-t-lg">
+const ProjectCard = ({ project, index, onFilterChange }) => (
+  <motion.div
+    layout
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 20 }}
+    transition={{ duration: 0.3, delay: index * 0.05 }}
+    className="group h-full"
+  >
+    <Card hover className="h-full overflow-hidden">
+      {/* Project Image */}
+      <div className="relative overflow-hidden rounded-t-lg">
+        {project.image ? (
           <motion.img
             src={project.image}
             alt={project.title}
             className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
             whileHover={{ scale: 1.05 }}
           />
-          
-          {/* Featured Badge */}
-          {project.featured && (
-            <div className="absolute top-4 left-4">
-              <Badge variant="primary" className="flex items-center space-x-1">
-                <Star className="w-3 h-3 fill-current" />
-                <span>Featured</span>
-              </Badge>
-            </div>
-          )}
-          
-          {/* Overlay with Links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            className="absolute inset-0 bg-black/60 flex items-center justify-center space-x-4 transition-opacity duration-300"
-          >
+        ) : (
+          <div className="w-full h-48 bg-gradient-to-br from-primary-500 via-secondary-500 to-secondary-700 flex items-center justify-center">
+            <span className="text-4xl opacity-60">{project.emoji || '💻'}</span>
+          </div>
+        )}
+
+        {/* Featured Badge */}
+        {project.featured && (
+          <div className="absolute top-4 left-4">
+            <Badge variant="primary" className="flex items-center space-x-1">
+              <Star className="w-3 h-3 fill-current" />
+              <span>Featured</span>
+            </Badge>
+          </div>
+        )}
+
+        {/* Overlay with Links */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          className="absolute inset-0 bg-black/60 flex items-center justify-center space-x-4 transition-opacity duration-300"
+        >
+          {project.liveUrl && (
             <Button
               variant="secondary"
               size="sm"
@@ -74,47 +59,49 @@ const Projects = () => {
             >
               Live Demo
             </Button>
-            <Button
+          )}
+          <Button
+            variant="outline"
+            size="sm"
+            icon={<Github />}
+            onClick={() => window.open(project.githubUrl, '_blank')}
+            className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+          >
+            Code
+          </Button>
+        </motion.div>
+      </div>
+
+      <Card.Content className="p-6">
+        <Card.Title className="mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+          {project.title}
+        </Card.Title>
+
+        <Card.Description className="mb-4 line-clamp-3">
+          {project.description}
+        </Card.Description>
+
+        {/* Technologies */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.technologies.map((tech) => (
+            <Badge
+              key={tech}
               variant="outline"
               size="sm"
-              icon={<Github />}
-              onClick={() => window.open(project.githubUrl, '_blank')}
-              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+              className="hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-950 cursor-pointer transition-colors"
+              onClick={() => onFilterChange(tech.toLowerCase())}
             >
-              Code
-            </Button>
-          </motion.div>
+              {tech}
+            </Badge>
+          ))}
         </div>
+      </Card.Content>
 
-        <Card.Content className="p-6">
-          <Card.Title className="mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-            {project.title}
-          </Card.Title>
-          
-          <Card.Description className="mb-4 line-clamp-3">
-            {project.description}
-          </Card.Description>
-
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.technologies.map((tech) => (
-              <Badge
-                key={tech}
-                variant="outline"
-                size="sm"
-                className="hover:border-primary-400 hover:bg-primary-50 dark:hover:bg-primary-950 cursor-pointer transition-colors"
-                onClick={() => setFilter(tech.toLowerCase())}
-              >
-                {tech}
-              </Badge>
-            ))}
-          </div>
-        </Card.Content>
-
-        {/* Card Footer */}
-        <Card.Footer className="p-6 pt-0">
-          <div className="flex items-center justify-between">
-            <div className="flex space-x-3">
+      {/* Card Footer */}
+      <Card.Footer className="p-6 pt-0">
+        <div className="flex items-center justify-between">
+          <div className="flex space-x-3">
+            {project.liveUrl && (
               <motion.a
                 href={project.liveUrl}
                 target="_blank"
@@ -125,22 +112,44 @@ const Projects = () => {
               >
                 <ExternalLink size={18} />
               </motion.a>
+            )}
+            {project.githubUrl && (
               <motion.a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Github size={18} />
-              </motion.a>
-            </div>
+              whileTap={{ scale: 0.95 }}
+            >
+              <Github size={18} />
+            </motion.a>)}
           </div>
-        </Card.Footer>
-      </Card>
-    </motion.div>
-  );
+        </div>
+      </Card.Footer>
+    </Card>
+  </motion.div>
+);
+
+const Projects = () => {
+  const [filter, setFilter] = useState('all');
+  const [visibleProjects, setVisibleProjects] = useState(6);
+
+  const allTechnologies = [...new Set(PROJECTS.flatMap(project => project.technologies))];
+
+  const filteredProjects = filter === 'all'
+    ? PROJECTS
+    : PROJECTS.filter(project =>
+        project.technologies.some(tech =>
+          tech.toLowerCase().includes(filter.toLowerCase())
+        )
+      );
+
+  const featuredProjects = PROJECTS.filter(project => project.featured);
+
+  const handleLoadMore = () => {
+    setVisibleProjects(prev => prev + 3);
+  };
 
   return (
     <section id="projects" className="relative section-padding overflow-hidden">
@@ -164,8 +173,8 @@ const Projects = () => {
               <span className="gradient-text">Featured Projects</span>
             </h2>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-              A showcase of my recent work. Each project represents a unique challenge and demonstrates 
-              different aspects of my technical expertise.
+              A showcase of our recent work. Each project represents a unique challenge and demonstrates
+              different aspects of our technical expertise.
             </p>
           </motion.div>
 
@@ -175,11 +184,11 @@ const Projects = () => {
               <Star className="w-5 h-5 text-yellow-500 mr-2 fill-current" />
               Featured Work
             </h3>
-            <AnimatedGrid columns={{ sm: 1, md: 2, lg: 2 }} gap={8}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {featuredProjects.slice(0, 2).map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
+                <ProjectCard key={project.id} project={project} index={index} onFilterChange={setFilter} />
               ))}
-            </AnimatedGrid>
+            </div>
           </motion.div>
 
           {/* Filter Controls */}
@@ -207,22 +216,11 @@ const Projects = () => {
           </motion.div>
 
           {/* Projects Grid */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={filter}
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              className="mb-12"
-            >
-              <AnimatedGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={8}>
-                {filteredProjects.slice(0, visibleProjects).map((project, index) => (
-                  <ProjectCard key={project.id} project={project} index={index} />
-                ))}
-              </AnimatedGrid>
-            </motion.div>
-          </AnimatePresence>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {filteredProjects.slice(0, visibleProjects).map((project, index) => (
+              <ProjectCard key={`${filter}-${project.id}`} project={project} index={index} onFilterChange={setFilter} />
+            ))}
+          </div>
 
           {/* Load More Button */}
           {visibleProjects < filteredProjects.length && (
@@ -252,7 +250,7 @@ const Projects = () => {
                 Explore More on GitHub
               </h3>
               <p className="text-neutral-300 mb-6">
-                Want to see more of my work? Check out my GitHub profile for additional projects, 
+                Want to see more of our work? Check out our GitHub profile for additional projects,
                 contributions, and code snippets.
               </p>
               <Button

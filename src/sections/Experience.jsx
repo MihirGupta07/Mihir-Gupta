@@ -130,7 +130,7 @@ const Experience = () => {
               <span className="gradient-text">Experience & Education</span>
             </h2>
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-              My professional journey and educational background that shaped my career in software development.
+              Our professional journey and educational background that shaped our approach to software development.
             </p>
           </motion.div>
 
@@ -194,8 +194,8 @@ const Experience = () => {
                 🎯 Core Competencies
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400 mb-6">
-                Throughout my journey, I've developed a strong foundation in full-stack development, 
-                with expertise in modern frameworks and a passion for creating exceptional user experiences.
+                Throughout our journey, we've developed a strong foundation in full-stack development,
+                with expertise in modern frameworks and a drive for creating exceptional user experiences.
               </p>
               
               <AnimatedGrid columns={{ sm: 1, md: 3, lg: 3 }} gap={6}>
