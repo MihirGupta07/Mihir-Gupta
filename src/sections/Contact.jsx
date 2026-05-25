@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Github, Linkedin, Twitter, Instagram, BookOpen, Code } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import toast from 'react-hot-toast';
-import { PERSONAL_INFO, CONTACT_INFO, EMAIL_CONFIG, SOCIAL_LINKS } from '@/data/constants';
+import { CONTACT_INFO, SOCIAL_LINKS } from '@/data/constants';
 import { isValidEmail } from '@/utils/helpers';
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem } from '@/utils/animations';
 import Card from '@/components/ui/Card';
@@ -98,35 +97,36 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Replace with your actual EmailJS configuration
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_email: PERSONAL_INFO.email,
+      const webhookUrl = import.meta.env.VITE_DISCORD_WEBHOOK_URL;
+
+      const payload = {
+        embeds: [
+          {
+            title: `New Contact: ${formData.subject}`,
+            color: 0x3b82f6,
+            fields: [
+              { name: 'Name', value: formData.name, inline: true },
+              { name: 'Email', value: formData.email, inline: true },
+              { name: 'Message', value: formData.message },
+            ],
+            timestamp: new Date().toISOString(),
+          },
+        ],
       };
 
-      // Note: Replace these with your actual EmailJS credentials
-      await emailjs.send(
-        EMAIL_CONFIG.serviceId,
-        EMAIL_CONFIG.templateId,
-        templateParams,
-        EMAIL_CONFIG.publicKey
-      );
+      const res = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error(`Discord webhook responded with ${res.status}`);
 
       toast.success('Message sent successfully! I\'ll get back to you soon.');
-      
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
-      console.error('EmailJS error:', error);
-      toast.error('Failed to send message. Please try again or contact me directly.');
+      console.error('Discord webhook error:', error);
+      toast.error('Failed to send message. Please try again or contact us directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -157,7 +157,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="relative section-padding bg-gradient-to-r from-neutral-50 via-white to-primary-50/30 dark:from-neutral-950 dark:via-neutral-900 dark:to-primary-950/30 overflow-hidden">
+    <section id="contact" className="relative section-padding overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-40 dark:opacity-20 z-0">
         <div className="absolute inset-0" style={{
