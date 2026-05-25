@@ -218,7 +218,7 @@ const Research = () => {
                   variant="secondary"
                   size="lg"
                   icon={<FileText />}
-                  onClick={() => window.open('mailto:mihirgupta0712@gmail.com?subject=Research Collaboration', '_blank')}
+                  onClick={() => window.open('mailto:contact@mihirgupta.dev?subject=Research Collaboration', '_blank')}
                 >
                   Discuss Research
                 </Button>

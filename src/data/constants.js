@@ -15,7 +15,7 @@ export const PERSONAL_INFO = {
   tagline: "Building scalable solutions with React.js & Next.js",
   description:
     "I'm a passionate software engineer and founding engineer at multiple startups, with experience in building scalable, impactful web applications from the ground up. Skilled in React.js, Next.js, Golang, Node.js, and cloud pipelines, I thrive at the intersection of product vision and technical execution. I've also published research in AI-driven encryption and healthcare risk prediction.",
-  email: "mihirgupta0712@gmail.com",
+  email: "contact@mihirgupta.dev",
   phone: "", // optional – add if you want it public
   location: "Bengaluru, India",
   avatar: mihirPhoto, // Replace with your actual photo
@@ -27,7 +27,7 @@ export const SOCIAL_LINKS = {
   github: "https://github.com/MihirGupta07", // replace with your actual GitHub
   linkedin: "https://www.linkedin.com/in/mihirgupta7",
   twitter: "",
-  email: "mailto:mihirgupta0712@gmail.com",
+  email: "mailto:contact@mihirgupta.dev",
   instagram: "https://www.instagram.com/snapsbymihir/",
   medium: "https://medium.com/@mihirgupta0712",
   dev: "",
@@ -209,7 +209,7 @@ export const RESEARCH = [
 
 
 export const CONTACT_INFO = {
-  email: "mihirgupta0712@gmail.com",
+  email: "contact@mihirgupta.dev",
   phone: "",
   location: "Bengaluru, India",
   availability: "Open to exciting opportunities",
