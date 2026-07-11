@@ -7,22 +7,20 @@ const Card = ({
   children,
   className,
   hover = true,
-  glass = false,
   padding = 'default',
   ...props
 }) => {
   const baseClasses = 'bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-lg transition-all duration-300';
-  
+
   const paddingClasses = {
     none: '',
     sm: 'p-4',
     default: 'p-6',
     lg: 'p-8',
   };
-  
+
   const cardClasses = cn(
     baseClasses,
-    glass && 'glass-effect',
     paddingClasses[padding],
     hover && 'hover:shadow-lg hover:shadow-neutral-200/50 dark:hover:shadow-neutral-800/50',
     className

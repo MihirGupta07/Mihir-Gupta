@@ -10,7 +10,7 @@ export const fadeInUp = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -25,7 +25,7 @@ export const fadeInDown = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -40,7 +40,7 @@ export const fadeInLeft = {
     x: 0,
     transition: {
       duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -55,7 +55,7 @@ export const fadeInRight = {
     x: 0,
     transition: {
       duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -70,7 +70,7 @@ export const scaleIn = {
     scale: 1,
     transition: {
       duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -85,7 +85,7 @@ export const slideInUp = {
     opacity: 1,
     transition: {
       duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99],
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
@@ -111,44 +111,11 @@ export const staggerItem = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.6, -0.05, 0.01, 0.99],
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
-export const bounceIn = {
-  hidden: {
-    opacity: 0,
-    scale: 0.3,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 300,
-      damping: 20,
-      duration: 0.8,
-    },
-  },
-};
-
-export const rotateIn = {
-  hidden: {
-    opacity: 0,
-    rotate: -180,
-    scale: 0.5,
-  },
-  visible: {
-    opacity: 1,
-    rotate: 0,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
-  },
-};
 
 export const hoverScale = {
   scale: 1.05,
@@ -192,7 +159,7 @@ export const pageVariants = {
 
 export const pageTransition = {
   type: 'tween',
-  ease: 'anticipate',
+  ease: [0.22, 1, 0.36, 1],
   duration: 0.5,
 };
 

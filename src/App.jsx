@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion';
 import Layout from '@/components/layout/Layout';
 import Hero from '@/sections/Hero';
 import About from '@/sections/About';
@@ -8,7 +8,6 @@ import Projects from '@/sections/Projects';
 import Experience from '@/sections/Experience';
 import Research from '@/sections/Research';
 import Contact from '@/sections/Contact';
-import ThemeParticles from '@/components/ui/ThemeParticles';
 import { pageVariants, pageTransition } from '@/utils/animations';
 
 function App() {
@@ -43,9 +42,6 @@ function App() {
     if ('performance' in window) {
       window.addEventListener('load', () => {
         const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-        console.log(`Page load time: ${loadTime}ms`);
-        
-        // Track to analytics if available
         if (window.gtag) {
           window.gtag('event', 'timing_complete', {
             name: 'load',
@@ -85,18 +81,11 @@ function App() {
     let deferredPrompt;
     
     window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('PWA install prompt available');
       e.preventDefault();
       deferredPrompt = e;
-      
-      // You can show a custom install button here
-      // For now, we'll just log it
-      console.log('Install prompt deferred');
     });
 
     window.addEventListener('appinstalled', () => {
-      console.log('PWA was installed');
-      
       // Track to analytics if available
       if (window.gtag) {
         window.gtag('event', 'app_installed', {
@@ -112,6 +101,7 @@ function App() {
   }, []);
 
   return (
+    <MotionConfig reducedMotion="user">
     <AnimatePresence mode="wait">
       <motion.div
         key="portfolio-app"
@@ -122,15 +112,6 @@ function App() {
         transition={pageTransition}
         className="min-h-screen relative"
       >
-        {/* Global Particles Background */}
-        <ThemeParticles 
-          count={380}
-          speed={1.5}
-          size={{ min: 1, max: 5 }}
-          opacity={{ min: 0.4, max: 0.7 }}
-          className="fixed inset-0 z-0"
-        />
-        
         <Layout>
           {/* Hero Section */}
           <Hero />
@@ -155,6 +136,7 @@ function App() {
         </Layout>
       </motion.div>
     </AnimatePresence>
+    </MotionConfig>
   );
 }
 

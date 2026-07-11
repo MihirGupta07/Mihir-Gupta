@@ -39,7 +39,7 @@ const Navbar = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled 
-          ? 'bg-white/80 dark:bg-neutral-950/80 backdrop-blur-lg border-b border-neutral-200/50 dark:border-neutral-700/50 shadow-sm' 
+          ? 'bg-white/90 dark:bg-neutral-900 backdrop-blur-lg border-b border-neutral-200/50 dark:border-neutral-700/50 shadow-sm'
           : 'bg-transparent'
       )}
     >
@@ -51,8 +51,8 @@ const Navbar = () => {
             className="cursor-pointer"
             onClick={() => smoothScrollTo('home')}
           >
-            <h1 className="text-xl font-bold gradient-text">
-              {`<${PERSONAL_INFO.name.replace(' ', '')} />`}
+            <h1 className="text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+              {PERSONAL_INFO.name}
             </h1>
           </motion.div>
 

@@ -33,7 +33,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand & Description */}
           <motion.div variants={staggerItem} className="space-y-4">
-            <h3 className="text-2xl font-bold gradient-text">
+            <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
               {PERSONAL_INFO.name}
             </h3>
             <p className="text-neutral-600 dark:text-neutral-400 max-w-md">
@@ -106,8 +106,8 @@ const Footer = () => {
           className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0"
         >
           <div className="flex flex-col   text-sm text-neutral-600 dark:text-neutral-400">
-            <span>Updated <span className="gradient-text">{currentYear}</span> by <span className="gradient-text">{PERSONAL_INFO.name}</span> </span>
-            <span>Made with ❤️, a little bit of <span className="gradient-text">Vibe Coding</span>, and lots of <span className="gradient-text">Coffee</span> ☕</span>
+            <span>© {currentYear} {PERSONAL_INFO.name}</span>
+            <span>Made with ❤️, a little bit of <span className="text-primary-600 dark:text-primary-400">vibe coding</span>, and lots of <span className="text-primary-600 dark:text-primary-400">coffee</span> ☕</span>
           </div>
           
           <div className="flex items-center space-x-6 text-sm text-neutral-600 dark:text-neutral-400">

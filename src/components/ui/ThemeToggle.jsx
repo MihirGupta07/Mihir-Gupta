@@ -11,7 +11,7 @@ const ThemeToggle = ({ className }) => {
     <motion.button
       onClick={toggleTheme}
       className={cn(
-        'relative p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-neutral-700',
+        'relative p-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:outline-none focus-visible:[box-shadow:var(--focus-ring)]',
         className
       )}
       whileHover={{ scale: 1.05 }}

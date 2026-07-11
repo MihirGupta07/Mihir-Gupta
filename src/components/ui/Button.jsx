@@ -16,14 +16,14 @@ const Button = ({
   type = 'button',
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed';
   
   const variants = {
-    primary: 'bg-primary-600 hover:bg-primary-700 text-white border border-transparent focus:ring-primary-500',
-    secondary: 'bg-white hover:bg-neutral-50 text-neutral-700 border border-neutral-300 focus:ring-primary-500 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:border-neutral-600',
-    outline: 'bg-transparent hover:bg-primary-50 text-primary-600 border border-primary-600 focus:ring-primary-500 dark:hover:bg-primary-950',
-    ghost: 'bg-transparent hover:bg-neutral-100 text-neutral-700 border border-transparent focus:ring-primary-500 dark:hover:bg-neutral-800 dark:text-neutral-200',
-    danger: 'bg-red-600 hover:bg-red-700 text-white border border-transparent focus:ring-red-500',
+    primary: 'bg-primary-600 hover:bg-primary-700 text-white border border-transparent focus:outline-none focus-visible:[box-shadow:var(--focus-ring)]',
+    secondary: 'bg-white hover:bg-neutral-100 text-neutral-700 border border-neutral-300 focus-visible:[box-shadow:var(--focus-ring)] dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:border-neutral-600',
+    outline: 'bg-transparent hover:bg-primary-50 text-primary-600 border border-primary-600 focus-visible:[box-shadow:var(--focus-ring)] dark:text-primary-400 dark:border-primary-400 dark:hover:bg-primary-950',
+    ghost: 'bg-transparent hover:bg-neutral-100 text-neutral-700 border border-transparent focus-visible:[box-shadow:var(--focus-ring)] dark:hover:bg-neutral-800 dark:text-neutral-300',
+    danger: 'bg-red-600 hover:bg-red-700 text-white border border-transparent focus-visible:[box-shadow:0_0_0_3px_rgb(239_68_68_/_0.35)]',
   };
   
   const sizes = {

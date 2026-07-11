@@ -9,11 +9,14 @@ const Input = React.forwardRef(({
   helper,
   icon,
   iconPosition = 'left',
+  id,
+  name,
   ...props
 }, ref) => {
+  const inputId = id || name;
   const inputClasses = cn(
-    'flex h-10 w-full rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-200',
-    error && 'border-red-500 focus:ring-red-500',
+    'flex h-10 w-full rounded-md border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 px-3 py-2 text-sm text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus:outline-none focus-visible:[box-shadow:var(--focus-ring)] disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-200',
+    error && 'border-red-500',
     icon && iconPosition === 'left' && 'pl-10',
     icon && iconPosition === 'right' && 'pr-10',
     className
@@ -22,7 +25,7 @@ const Input = React.forwardRef(({
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+        <label htmlFor={inputId} className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
           {label}
         </label>
       )}
@@ -36,6 +39,8 @@ const Input = React.forwardRef(({
         )}
         <input
           type={type}
+          id={inputId}
+          name={name}
           className={inputClasses}
           ref={ref}
           {...props}

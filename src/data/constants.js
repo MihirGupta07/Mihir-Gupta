@@ -12,9 +12,9 @@ import {
 export const PERSONAL_INFO = {
   name: "Mihir Gupta",
   title: "Software Engineer",
-  tagline: "Building scalable solutions with React.js & Next.js",
+  tagline: "Founding engineer. Full-stack from React to Go.",
   description:
-    "I'm a passionate software engineer and founding engineer at multiple startups, with experience in building scalable, impactful web applications from the ground up. Skilled in React.js, Next.js, Golang, Node.js, and cloud pipelines, I thrive at the intersection of product vision and technical execution. I've also published research in AI-driven encryption and healthcare risk prediction.",
+    "Founding engineer at two Bengaluru startups — building cognitive wellness software at Ivory, and a digital trade platform at Almond. Full-stack in React, Go, and Node. Published research in AI encryption and cardiovascular disease prediction.",
   email: "contact@mihirgupta.dev",
   phone: "", // optional – add if you want it public
   location: "Bengaluru, India",
@@ -74,34 +74,34 @@ export const SKILLS = {
 export const PROJECTS = [
   {
     id: 1,
-    title: "Cashira - Money Tracking PWA",
+    title: "Cashira",
     description:
-      "A modern progressive web app to track expenses with category grids, charts, and Firebase authentication.",
+      "Expense tracker PWA with category breakdowns, charts, and real-time sync via Firebase.",
     image: cashiraImage,
     technologies: ["Next.js", "Firebase", "Firestore", "Tailwind CSS"],
-    liveUrl: "https://cashira.vercel.app", 
+    liveUrl: "https://cashira.vercel.app",
     githubUrl: "https://github.com/MihirGupta07/cashira",
     featured: true,
   },
   {
     id: 2,
-    title: "Vocaprep - English Language Learning App",
+    title: "Vocaprep",
     description:
-      "A PWA for learning English language with flashcards, for competitive exams like GMAT, GRE, TOEFL, IELTS, etc.",
+      "Vocabulary flashcard PWA for competitive exam prep — GMAT, GRE, TOEFL, and IELTS.",
     image: vocaprepImage,
     technologies: ["React.js", "Framer Motion", "PWA", "Tailwind CSS"],
-    liveUrl: "https://voca-prep.vercel.app/", 
+    liveUrl: "https://voca-prep.vercel.app/",
     githubUrl: "https://github.com/MihirGupta07/VocaPrep",
     featured: true,
   },
   {
     id: 3,
-    title: "AmIOkay - Self Diagnosis App using Machine Learning",
+    title: "AmIOkay",
     description:
-      "An online disease predictor can also suggest medicines and nearby hospitals based on the three symptoms.",
+      "ML-powered symptom checker. Enter three symptoms to get a disease prediction, suggested medicines, and nearby hospital recommendations.",
     image: amiokayImage,
     technologies: ["HTML", "Tailwind CSS", "Flask", "Machine Learning"],
-    liveUrl: "https://devpost.com/software/amiok", 
+    liveUrl: "https://devpost.com/software/amiok",
     githubUrl: "https://github.com/suhaasbadada/amiokay",
     featured: true,
   },
@@ -116,10 +116,10 @@ export const EXPERIENCE = [
     period: "Jan 2024 – Present",
     location: "Bengaluru, India",
     description:
-      "Leading core product development from scratch with React.js, Node.js, MongoDB, PWA, and AWS Code Pipelines.",
+      "Building the core product from zero — a cognitive wellness platform for elderly users. React, Node, MongoDB, and AWS pipelines.",
     achievements: [
-      "Aligned technology strategy with company mission",
-      "Developed solutions enhancing elderly cognitive wellness",
+      "Set technical direction for a zero-to-one product build",
+      "Shipped features for a cognitive wellness platform serving elderly users",
     ],
   },
   {
@@ -129,10 +129,10 @@ export const EXPERIENCE = [
     period: "Aug 2024 – Jan 2025",
     location: "Bengaluru, India",
     description:
-      "Built a digital trade platform leveraging Next.js, PostgreSQL, Drizzle ORM, and tRPC.",
+      "Built a digital trade platform from scratch. Next.js frontend, PostgreSQL and tRPC backend.",
     achievements: [
-      "Collaborated closely with founders to align product and tech",
-      "Delivered scalable and innovative product features",
+      "Worked directly with founders on product decisions and technical scope",
+      "Owned end-to-end delivery of core product features from design to production",
     ],
   },
   {
@@ -142,9 +142,9 @@ export const EXPERIENCE = [
     period: "Jan 2023 – Jan 2024",
     location: "Hyderabad, India",
     description:
-      "Developed optimized APIs and frontend features across WhitehatJr and Byju’s Neo InClass.",
+      "Shipped APIs and frontend features across WhitehatJr and Byju’s Neo InClass products.",
     achievements: [
-      "Built multiple Golang APIs improving performance",
+      "Built Golang APIs that improved backend response times",
       "Reduced user drop-offs by 45% with React.js enhancements",
       "Independently delivered 10+ PRDs from planning to release",
     ],
@@ -212,7 +212,7 @@ export const CONTACT_INFO = {
   email: "contact@mihirgupta.dev",
   phone: "",
   location: "Bengaluru, India",
-  availability: "Open to exciting opportunities",
+  availability: "Available for full-time roles",
   response_time: "Usually responds within 24 hours",
 };
 
