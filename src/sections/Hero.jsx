@@ -43,7 +43,7 @@ const Hero = () => {
             variants={staggerItem}
             className="text-lead font-medium text-neutral-600 dark:text-neutral-400 mb-4"
           >
-            Building product at Ivory. Three years across startups and engineering teams.
+            Engineering the future of Cognitive Health at <a href="https://www.liveivory.com" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline">Ivory</a>.
           </motion.p>
 
           {/* Description */}

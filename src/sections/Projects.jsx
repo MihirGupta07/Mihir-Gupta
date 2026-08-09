@@ -12,11 +12,19 @@ const ProjectCard = ({ project, index }) => (
   >
     {/* Project Image */}
     <div className="relative overflow-hidden">
-      <img
-        src={project.image}
-        alt={project.title}
-        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-      />
+      {project.image ? (
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div className="w-full h-48 bg-gradient-to-br from-neutral-800 to-neutral-950 dark:from-neutral-800 dark:to-black flex items-center justify-center">
+          <span className="text-3xl font-semibold text-neutral-500 tracking-wide">
+            {project.title}
+          </span>
+        </div>
+      )}
     </div>
 
     <div className="p-6">
@@ -39,24 +47,28 @@ const ProjectCard = ({ project, index }) => (
 
       {/* Links */}
       <div className="flex items-center gap-4">
-        <a
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-        >
-          <ExternalLink size={14} />
-          Live Demo
-        </a>
-        <a
-          href={project.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
-        >
-          <Github size={14} />
-          Code
-        </a>
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          >
+            <ExternalLink size={14} />
+            Live Demo
+          </a>
+        )}
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
+          >
+            <Github size={14} />
+            Code
+          </a>
+        )}
       </div>
     </div>
   </motion.div>

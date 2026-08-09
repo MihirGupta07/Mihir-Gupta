@@ -13,6 +13,9 @@ import logoLight from './logo-light.png';
 import logoDark from './logo-dark.png';
 import logoFavicon from './logo-favicon.png';
 import metaImage from './meta-image.png';
+import gitwizzImage from './gitwizz.png';
+import geohideImage from './geohide.png';
+import caloImage from './calo.png';
 export {
   mihirPhoto,
   backgroundImage,
@@ -26,6 +29,9 @@ export {
   logoLight,
   logoDark,
   logoFavicon,
-  metaImage
+  metaImage,
+  gitwizzImage,
+  geohideImage,
+  caloImage,
 
 };

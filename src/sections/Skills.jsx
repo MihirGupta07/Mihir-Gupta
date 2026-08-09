@@ -7,6 +7,7 @@ import Badge from '@/components/ui/Badge';
 const skillCategories = [
   { title: 'Frontend', skills: SKILLS.frontend },
   { title: 'Backend', skills: SKILLS.backend },
+  { title: 'AI & Systems', skills: SKILLS.ai_systems },
   { title: 'Tools', skills: SKILLS.tools },
 ];
 
@@ -26,7 +27,7 @@ const Skills = () => {
               Skills
             </h2>
             <p className="text-neutral-600 dark:text-neutral-400 max-w-xl leading-relaxed">
-              I reach for React and Go on most projects.
+              Full-stack on Next.js and Node, with hands-on LLM/RAG systems work.
             </p>
           </motion.div>
 
