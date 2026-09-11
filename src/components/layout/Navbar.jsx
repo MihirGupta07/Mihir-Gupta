@@ -51,9 +51,9 @@ const Navbar = () => {
             className="cursor-pointer"
             onClick={() => smoothScrollTo('home')}
           >
-            <h1 className="text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+            <span className="text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
               {PERSONAL_INFO.name}
-            </h1>
+            </span>
           </motion.div>
 
           {/* Desktop Navigation */}

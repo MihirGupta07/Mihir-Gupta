@@ -1,0 +1,48 @@
+# Mihir Gupta
+
+> Senior full-stack software engineer in Bengaluru, India. Founding engineer at two startups (Ivory, Almond). Builds AI-integrated products end-to-end with React, Next.js, Node.js, and LLM/RAG systems. Published researcher in AI-based encryption and cardiovascular disease prediction.
+
+Site: https://mihirgupta.dev — single-page portfolio (sections: About, Skills, Projects, Experience, Research, Contact).
+
+## Summary
+
+- Name: Mihir Gupta
+- Role: Founding Software Engineer at Ivory (cognitive health), Jan 2024 – present
+- Location: Bengaluru, India
+- Email: contact@mihirgupta.dev
+- Education: B.Tech Computer Science, Vellore Institute of Technology (2019–2023)
+- Availability: open to full-time roles
+
+## Experience
+
+- Ivory (Founding Software Engineer, 2024–present): architected and shipped 5 production healthcare platforms (D2C, B2B SaaS, CRM, internal tools, clinical research). Scaled a D2C cognitive wellness product to 60K+ users and a B2B SaaS to 200+ healthcare partners. Built a self-updating RAG assistant over a code knowledge graph spanning 20+ repos.
+- Almond (Founding Software Engineer, Aug 2024 – Jan 2025): sole engineer for a B2B digital trade platform on Next.js, PostgreSQL, Drizzle ORM, tRPC.
+- BYJU'S (Member of Technical Staff 1, 2023–2024): Node.js APIs and React features across WhitehatJr, Aakash, Byju's Neo; reduced user drop-offs by 45%.
+- Internships: TapTalent.ai, Appskill Technologies, The Happy Turtle (2022).
+
+## Skills
+
+Frontend: React, Next.js, TypeScript, JavaScript, Redux, Zustand, React Native, Tailwind CSS.
+Backend: Node.js, tRPC, Socket.io, PostgreSQL, Drizzle ORM, MongoDB, Firebase, REST API design.
+AI systems: LLM integration (OpenAI, Gemini, Groq), RAG pipelines, knowledge graphs, MCP.
+Tools: Git, AWS, Docker, Figma.
+
+## Projects
+
+- GeoHide (https://geohide.in): real-time multiplayer hide-and-seek inside Google Street View; server-authoritative Socket.io engine, web + iOS/Android.
+- calo (https://calo.mihirgupta.dev): AI calorie/macro tracker for the Indian market; multi-provider LLM pipeline, offline-first PWA.
+- Kairos (https://kairos.mihirgupta.dev): multi-tenant AI sales platform — objection extraction from call transcripts, rebuttal playbooks, geo-optimized field routes.
+- GitWizz (https://git-wizz.vercel.app): interactive Git learning platform with a D3.js commit-graph engine and guardrailed AI tutor.
+- Wrapshare (https://github.com/MihirGupta07/wrapshare): on-demand Spotify Wrapped-style recaps with Razorpay payments.
+- Qestra (https://github.com/MihirGupta07/Qestra): governed multi-agent AI orchestrator with approval-gated execution and audit trails.
+
+## Research
+
+- "Symmetric Encryption using Artificial Neural Network, Binary Tree Traversal, and Interleaving Salting" — IJEAT, Vol. 11, Issue 6, 2022. https://www.ijeat.org/wp-content/uploads/papers/v11i6/F37220811622.pdf
+- "Predicting Cardiovascular Disease (CVD) Risk Over Time Utilizing Multifaceted Health and Lifestyle Parameters" — IJSR, 2023. https://www.ijsr.net/getabstract.php?paperid=SR23911102627
+
+## Links
+
+- GitHub: https://github.com/MihirGupta07
+- LinkedIn: https://www.linkedin.com/in/mihirgupta7
+- Medium: https://medium.com/@mihirgupta0712
