@@ -1,0 +1,10 @@
+# 03-stronghold -> public/mc/03-stronghold.jpg  (screen: skills)
+# Paste everything below this line.
+
+Minecraft-style voxel world rendered with a high-end ray-traced shader pack (BSL / Complementary Reimagined look). Everything is built from perfectly uniform 1x1 cubic blocks on a strict axis-aligned grid with sharp 90-degree edges - no rounded corners, no bevels, no subdivision, no organic curves, no smoothed silhouettes. Block textures are 16x16 pixel textures, crisp nearest-neighbour, visibly pixelated, never blurred or upscaled-smooth. Third-person over-the-shoulder camera, player character slightly right of centre, back to camera, mid-distance framing, horizon on the upper third. 16:9, 2560x1440. Volumetric god rays, soft shadows, subtle atmospheric fog with depth. Cinematic but clean - the centre of the frame stays calm and uncluttered, negative space in the middle third, so interface panels can sit on top of it.
+
+CHARACTER: a blocky Minecraft player skin - black t-shirt with a single teal collar stripe, dark grey trousers, dark brown blocky hair, medium-brown skin, short beard. Flat cuboid limbs, no joints, no anatomy, no facial detail, no cloth simulation. Same skin, same proportions, same scale as every other image in this set.
+
+SCENE: Underground stronghold library. Stone-brick walls, bookshelf blocks floor to ceiling, an enchanting table on an obsidian plinth with an open book hovering above it, purple glyph particles rising as small squares, floating book blocks orbiting. Purple and violet key light from the enchanting table, deep cool shadow elsewhere, a few warm torches on the walls. Dark, moody, high contrast.
+
+NEGATIVE: smooth surfaces, rounded edges, subdivision, bevelled cubes, anti-aliased textures, blurry pixels, realistic humans, real faces, hands with fingers, photorealistic skin, low-poly organic shapes, Roblox style, Lego studs, plastic sheen, toy bricks, text, watermark, logo, UI overlay, HUD, hotbar, hearts, XP bar, chat box, inventory, crosshair, motion blur, depth-of-field bokeh, fisheye, tilt-shift.
