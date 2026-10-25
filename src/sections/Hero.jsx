@@ -32,7 +32,7 @@ const Hero = () => {
           {/* Name */}
           <motion.h1
             variants={staggerItem}
-            className="text-hero font-bold text-neutral-900 dark:text-neutral-100 mb-6"
+            className="text-hero font-semibold text-neutral-900 dark:text-neutral-100 mb-6"
             style={{ textWrap: 'balance' }}
           >
             {PERSONAL_INFO.name}

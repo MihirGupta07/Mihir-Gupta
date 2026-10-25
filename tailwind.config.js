@@ -53,8 +53,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Figtree', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Monaco', 'Cascadia Code', 'Segoe UI Mono', 'monospace'],
+        sans: ['Pixelify Sans', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         // Fluid display scale — perfect fourth (×1.333), clamp() for smooth viewport scaling

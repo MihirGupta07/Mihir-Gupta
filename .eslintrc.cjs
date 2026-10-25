@@ -10,7 +10,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.js'],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { 
     ecmaVersion: 'latest', 
     sourceType: 'module',
@@ -24,6 +24,10 @@ module.exports = {
     } 
   },
   plugins: ['react-refresh'],
+  overrides: [
+    // React Three Fiber elements take three.js props (args, position-y, castShadow, ...)
+    { files: ['src/world/scene/**/*.jsx'], rules: { 'react/no-unknown-property': 'off' } },
+  ],
   rules: {
     'react-refresh/only-export-components': [
       'warn',

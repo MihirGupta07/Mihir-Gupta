@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Metric-matched fallback — reduces layout shift while Figtree loads */
-@font-face {
-  font-family: 'Figtree-Fallback';
-  src: local('Arial');
-  size-adjust: 97%;
-  ascent-override: 93%;
-  descent-override: 22%;
-  line-gap-override: 0%;
-}
-
 @layer base {
   /* Design tokens — forest green accent, OKLCH */
   :root {
@@ -41,7 +31,7 @@
   body {
     @apply bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100;
     @apply transition-colors duration-300;
-    font-family: 'Figtree', 'Figtree-Fallback', system-ui, sans-serif;
+    font-family: 'Pixelify Sans', ui-monospace, monospace;
     font-kerning: normal;
     font-optical-sizing: auto;
     line-height: 1.65;

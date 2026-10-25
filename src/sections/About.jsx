@@ -33,7 +33,7 @@ const About = () => {
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {STATS.map((stat) => (
                   <div key={stat.label} className="border-t border-neutral-200 dark:border-neutral-700 pt-4">
-                    <div className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">
+                    <div className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
                       {stat.value}
                     </div>
                     <div className="text-sm text-neutral-500 dark:text-neutral-400">
