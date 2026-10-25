@@ -125,12 +125,12 @@ export default function Player() {
 
     // ---- movement
     const k = keys.current;
-    const ix = (k.has('d') || k.has('arrowright') ? 1 : 0) - (k.has('a') || k.has('arrowleft') ? 1 : 0);
-    const iz = (k.has('s') || k.has('arrowdown') ? 1 : 0) - (k.has('w') || k.has('arrowup') ? 1 : 0);
+    const ix = (k.has('d') || k.has('arrowright') ? 1 : 0) - (k.has('a') || k.has('arrowleft') ? 1 : 0) + rig.stick.x;
+    const iz = (k.has('s') || k.has('arrowdown') ? 1 : 0) - (k.has('w') || k.has('arrowup') ? 1 : 0) + rig.stick.y;
     const speed = k.has('shift') ? 22 : 11;
     const sy = Math.sin(rig.yaw), cy = Math.cos(rig.yaw);
     const wantX = (ix * cy + iz * sy) * speed, wantZ = (-ix * sy + iz * cy) * speed;
-    const len = Math.hypot(ix, iz) || 1;
+    const len = Math.max(1, Math.hypot(ix, iz)); // caps diagonals; a half-pushed stick walks at half speed
     vel.current.x = damp(vel.current.x, wantX / len, 6, dt);
     vel.current.z = damp(vel.current.z, wantZ / len, 6, dt);
 

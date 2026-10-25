@@ -173,6 +173,21 @@
 .minimap__me { fill: #fff8ea; filter: drop-shadow(0 0 3px var(--gold)); }
 .minimap__q { fill: var(--faint); font: 600 9px var(--sans); text-anchor: middle; }
 
+/* touch movement stick: phones and tablets only */
+.joystick {
+  display: none; position: absolute; left: 24px; bottom: 48px; z-index: 25; width: 120px; height: 120px;
+  border-radius: 50%; background: rgba(9, 10, 24, 0.45); border: 1px solid var(--rule); touch-action: none;
+}
+.joystick__knob {
+  position: absolute; left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%;
+  background: rgba(237, 230, 218, 0.18); border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent);
+  box-shadow: 0 0 14px -4px var(--gold); pointer-events: none;
+}
+@media (pointer: coarse) {
+  .joystick { display: block; }
+  .hud-prompt { bottom: 188px !important; }
+}
+
 .tour, .onboard {
   position: absolute; z-index: 35; background: rgba(9, 10, 24, 0.88); border: 1px solid var(--rule); border-radius: var(--r-lg);
   box-shadow: 0 24px 60px -20px rgba(3, 3, 10, 0.7);

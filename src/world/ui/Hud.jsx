@@ -102,6 +102,37 @@ function TourCard() {
   );
 }
 
+// Touch-only movement stick (CSS hides it unless the primary pointer is coarse).
+const STICK_R = 44;
+function Joystick() {
+  const knob = useRef();
+  const id = useRef(null);
+  const set = (x, y) => {
+    rig.stick.x = x; rig.stick.y = y;
+    if (knob.current) knob.current.style.transform = `translate(${x * STICK_R}px, ${y * STICK_R}px)`;
+  };
+  const move = (e) => {
+    if (e.pointerId !== id.current) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    let x = (e.clientX - r.left - r.width / 2) / STICK_R, y = (e.clientY - r.top - r.height / 2) / STICK_R;
+    const l = Math.hypot(x, y);
+    if (l > 1) { x /= l; y /= l; }
+    set(x, y);
+  };
+  const end = (e) => { if (e.pointerId === id.current) { id.current = null; set(0, 0); } };
+  useEffect(() => () => set(0, 0), []);
+  return (
+    <div className="joystick" aria-hidden="true"
+      onPointerDown={(e) => {
+        id.current = e.pointerId; rig.travel = null; move(e);
+        try { e.currentTarget.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }
+      }}
+      onPointerMove={move} onPointerUp={end} onPointerCancel={end}>
+      <span ref={knob} className="joystick__knob" />
+    </div>
+  );
+}
+
 export default function Hud({ onClassic }) {
   const phase = useWorld((s) => s.phase);
   const nearby = useWorld((s) => s.nearby);
@@ -162,6 +193,7 @@ export default function Hud({ onClassic }) {
       )}
 
       <Minimap />
+      {!panel && <Joystick />}
       <TourCard />
       <Onboarding />
     </>
