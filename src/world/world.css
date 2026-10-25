@@ -9,8 +9,8 @@
   --gold: #ffcf7a;
   --rule: rgba(237, 230, 218, 0.12);
   /* one pixel family for everything; --serif is the display role, same face */
-  --serif: 'Pixelify Sans', ui-monospace, monospace;
-  --sans: 'Pixelify Sans', ui-monospace, monospace;
+  --serif: 'Monocraft', ui-monospace, monospace;
+  --sans: 'Monocraft', ui-monospace, monospace;
   /* type roles: display = pixel at size; label = uppercase sans; data = tabular sans, only for dates, counts and keys */
   --t-label: 600 0.75rem/1.2 var(--sans);
   --t-label-sm: 600 0.6875rem/1.2 var(--sans);

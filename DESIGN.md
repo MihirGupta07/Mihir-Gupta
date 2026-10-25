@@ -19,62 +19,62 @@ colors:
   fog: "#6A5778"
 typography:
   display:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "clamp(3.4rem, 8vw, 6rem)"
     fontWeight: 500
     lineHeight: 0.95
     letterSpacing: "0"
   headline:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "clamp(2.5rem, 4vw, 3.5rem)"
     fontWeight: 500
     lineHeight: 1
   title:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "1.5rem"
     fontWeight: 500
     lineHeight: 1.15
   body:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.7
   lead:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.55
   body-lg:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.7
   body-sm:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "0.9375rem"
     fontWeight: 400
     lineHeight: 1.6
   chip:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "0.8125rem"
     fontWeight: 500
     lineHeight: 1.3
   label:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "0.75rem"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "0.14em"
     textTransform: uppercase
   label-sm:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "0.6875rem"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "0.12em"
     textTransform: uppercase
   data:
-    fontFamily: "'Pixelify Sans', ui-monospace, monospace"
+    fontFamily: "'Monocraft', ui-monospace, monospace"
     fontSize: "0.75rem"
     fontWeight: 400
     lineHeight: 1.4
@@ -149,7 +149,7 @@ The system rejects three looks: the generic teal/purple SaaS portfolio (gradient
 
 **Key Characteristics:**
 - A live 3D scene is the background. The UI floats over it as translucent ink.
-- One family: Pixelify Sans at 400–600, upright only. Hierarchy comes from size, weight and case, never from a second face.
+- One family: Monocraft at 400–600, upright only. Hierarchy comes from size, weight and case, never from a second face.
 - Ember is the one global accent, and each destination brings its own place tint.
 - Hairline rules and small radii. Borders do the work that boxes would.
 - Motion is slow and settles; nothing bounces.
@@ -183,7 +183,7 @@ Each destination sets `--c` on its panel and HUD prompt. The tint drives the pan
 
 ## 3. Typography
 
-**Font:** Pixelify Sans (fallback: ui-monospace, monospace)
+**Font:** Monocraft (fallback: ui-monospace, monospace)
 
 One family is loaded, as a single variable file covering weights 400–600. No italic, no second family.
 
@@ -198,7 +198,7 @@ One family is loaded, as a single variable file covering weights 400–600. No i
 - **Data** (400, 0.75rem, tabular numbers): dates, tour step numbers, level indices, key caps.
 
 ### Named Rules
-**The One Face Rule.** Pixelify Sans at 400/500/600 is the whole type kit. A new weight, style or family needs a reason that size, weight and case cannot meet. Data gets `tabular-nums`, not a monospace.
+**The One Face Rule.** Monocraft at 400/500/600 is the whole type kit. A new weight, style or family needs a reason that size, weight and case cannot meet. Data gets `tabular-nums`, not a monospace.
 
 **The Pixel Grid Rule.** Never slant, condense, or apply negative tracking to the pixel face; synthesized italics and tight tracking smear the grid. Emphasis is weight 600 or Ember, never italic.
 

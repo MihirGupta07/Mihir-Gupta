@@ -93,9 +93,13 @@
     </script>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..600&display=swap" rel="stylesheet">
+    <!-- Monocraft by IdreesInc (OFL), subset to Latin + punctuation -->
+    <link rel="preload" href="/fonts/monocraft-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/monocraft-600.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+      @font-face { font-family: 'Monocraft'; src: url('/fonts/monocraft-400.woff2') format('woff2'); font-weight: 400 500; font-display: swap; }
+      @font-face { font-family: 'Monocraft'; src: url('/fonts/monocraft-600.woff2') format('woff2'); font-weight: 600 700; font-display: swap; }
+    </style>
   </head>
   <body class="antialiased">
     <!-- Google Tag Manager (noscript) -->

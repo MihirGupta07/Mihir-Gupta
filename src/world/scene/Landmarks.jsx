@@ -412,16 +412,16 @@ function Landing() {
       g.clearRect(0, 0, 2048, 1024);
       g.fillStyle = '#FFDDA0';
       g.textAlign = 'left';
-      g.font = '500 92px "Pixelify Sans", monospace';
+      g.font = '500 92px Monocraft, monospace';
       g.fillText('SOFTWARE ENGINEER · BUILDER', 120, 230);
-      g.font = '600 300px "Pixelify Sans", monospace';
+      g.font = '600 300px Monocraft, monospace';
       g.fillText(PERSONAL_INFO.name.split(' ')[0], 110, 560);
       g.fillText(PERSONAL_INFO.name.split(' ').slice(1).join(' '), 110, 860);
       g.fillRect(120, 285, 520, 4);
       tex.needsUpdate = true;
     };
     draw();
-    document.fonts?.ready.then(draw);
+    document.fonts?.load('600 300px Monocraft').then(draw);
   }, [tex]);
   const lamps = useMemo(() => Array.from({ length: 7 }, (_, k) => {
     const a = Math.PI * 0.15 + (k / 6) * Math.PI * 0.7 + Math.PI;

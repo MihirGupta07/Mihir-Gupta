@@ -53,7 +53,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Pixelify Sans', 'ui-monospace', 'monospace'],
+        sans: ['Monocraft', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         // Fluid display scale — perfect fourth (×1.333), clamp() for smooth viewport scaling
