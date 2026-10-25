@@ -186,6 +186,8 @@
 @media (pointer: coarse) {
   .joystick { display: block; }
   .hud-prompt { bottom: 188px !important; }
+  /* the stick owns the bottom-left corner on touch screens (landscape phones still show the minimap) */
+  .minimap { left: auto; right: 24px; width: 140px; }
 }
 
 .tour, .onboard {
