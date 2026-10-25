@@ -39,7 +39,7 @@ const Navbar = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled 
-          ? 'bg-white/90 dark:bg-neutral-900 backdrop-blur-lg border-b border-neutral-200/50 dark:border-neutral-700/50 shadow-sm'
+          ? 'bg-white/90 dark:bg-neutral-900 backdrop-blur-lg border-b border-[oklch(0.900_0.008_155/0.5)] dark:border-[oklch(0.362_0.009_155/0.5)] shadow-sm'
           : 'bg-transparent'
       )}
     >
@@ -124,7 +124,7 @@ const Navbar = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden border-t border-neutral-200 dark:border-neutral-700 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-lg"
+              className="md:hidden border-t border-neutral-200 dark:border-neutral-700 bg-white/95 dark:bg-[oklch(0.108_0.005_155/0.95)] backdrop-blur-lg"
             >
               <div className="py-4 space-y-2">
                 {NAVIGATION.map((item) => {

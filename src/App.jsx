@@ -136,7 +136,7 @@ function App() {
     {hasWebGL() && (
       <button
         onClick={toWorld}
-        className="fixed bottom-5 left-5 z-50 rounded-full border border-neutral-300 dark:border-neutral-700 bg-white/90 dark:bg-neutral-900/90 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 shadow-sm hover:text-primary-600"
+        className="fixed bottom-5 left-5 z-50 rounded-full border border-neutral-300 dark:border-neutral-700 bg-white/90 dark:bg-[oklch(0.172_0.006_155/0.9)] px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 shadow-sm hover:text-primary-600"
       >
         Explore the 3D world →
       </button>

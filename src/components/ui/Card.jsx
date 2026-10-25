@@ -22,7 +22,7 @@ const Card = ({
   const cardClasses = cn(
     baseClasses,
     paddingClasses[padding],
-    hover && 'hover:shadow-lg hover:shadow-neutral-200/50 dark:hover:shadow-neutral-800/50',
+    hover && 'hover:shadow-lg hover:shadow-[color:oklch(0.900_0.008_155/0.5)] dark:hover:shadow-[color:oklch(0.255_0.008_155/0.5)]',
     className
   );
   
