@@ -6,6 +6,7 @@ at the path given, then set `ready: true` for it in `src/world/assets/manifest.j
 
 Twelve images ship into the app (A01–A12). Five more (A13–A17) are concept references for the landmarks.
 They are not loaded by the site. Use them to model or kitbash `.glb` files later; the 3D specs are in §4.
+The share image, favicons and home-screen icons (B01–B06) are in §6.
 
 ---
 
@@ -358,3 +359,123 @@ runtime. No baked lighting is required. Lights are real-time plus bloom.
 | A12 | CSS gradient |
 
 **Priority order if you only generate a few:** A01 → A02 → A12 → A03 → A04 → A08 → the rest.
+
+---
+
+## 6. Brand and share images (B01–B06)
+
+These images live outside the 3D world: the browser tab, the home screen, and link previews on WhatsApp,
+Slack, LinkedIn and X. Today `public/favicon.png`, `public/apple-touch-icon.png` and `public/og-image.png`
+are 200×200 placeholders, and `theme-color` is an off-brand green (`#1a7a3e`). Section 1's palette and
+negative prompt apply here too, with the exceptions noted below.
+
+**Text rule.** Image models still misspell names. Generate every image here **without text**, then set the
+type yourself (Figma, Canva or Photopea). The site's typeface is **Pixelify Sans** (Google Fonts), weight
+500–600, in limestone `#D9D2C5`, with gold `#FFCF7A` for accents.
+
+**The mark.** Every icon uses one symbol, the **Ember Isle**: a small floating island seen at a slight
+three-quarter angle. It has a flat top, a jagged rock underside tapering to a point, one tiny tower and a
+single gold diamond ember hovering above. It repeats the ember trail people follow in the world, and it
+still reads at 16 px. Don't use the Allay avatar as the brand mark: it's a Mojang character.
+
+### B01 — Open Graph / share image
+- **Filename / path:** `public/og-image.png` (already referenced by `og:image` and `twitter:image`)
+- **Where:** Link previews on LinkedIn, X, Slack, WhatsApp, Discord and iMessage.
+- **Type:** Flat image, textless plate plus a typography overlay you add.
+- **Prompt (plate):**
+  > Cinematic wide shot of a floating stone archipelago above an endless lavender cloud sea, eleven
+  > minutes after sunset. The islands sit in the right 55% of the frame: a slender limestone tower with
+  > a floating bronze ring crown and warm gold windows, a circular arena ringed by faint cyan holograms,
+  > and a lone lighthouse on the farthest island sending a pale white-blue beam into the stars. A thin
+  > line of small glowing gold diamond embers curves from the bottom-left foreground across a stone
+  > bridge toward the tower. The left 45% is calm open sky: ember-rose horizon (#E0705A) fading to indigo
+  > (#2A1F4F → #0B1030), with a few early stars and nothing else, kept clean for a headline. Atmospheric
+  > perspective, Unreal Engine 5 cinematic quality, 35mm lens, crisp silhouettes, quiet and monumental.
+- **Overlay (add after generating):** inside the left 45%, vertically centred, 64 px margin:
+  `MIHIR GUPTA` (Pixelify Sans 600, 76 px, `#D9D2C5`, letter-spacing 0.04em), then `Software Engineer ·
+  AI products` (Pixelify Sans 500, 30 px, `#FFCF7A`), then `mihirgupta.dev` (24 px, `#D9D2C5` at 70%).
+- **Aspect / resolution:** **1200×630** (1.91:1). Generate at 2400×1260 and downscale.
+- **Safe area:** WhatsApp and some Slack previews crop to a centred square. Keep the tower and the name
+  inside the centre 630×630. Nothing important within 40 px of any edge.
+- **Transparency:** No. Export PNG, or JPEG q88 if it's over 300 KB (keep it under 1 MB).
+- **Negative:** global + `text, letters, people, ships, dragons, busy foreground, cropped islands at edges`
+- **Variants:** `og-image-square.png` 1200×1200 (same scene with the islands centred, for platforms that
+  prefer a square).
+
+### B02 — Favicon master (the Ember Isle mark)
+- **Filename / path:** `docs/brand/mark_master.png` (source only), exported to the B03–B05 files.
+- **Type:** Flat icon illustration, transparent background.
+- **Prompt:**
+  > A single bold app-icon symbol: a small floating island in three-quarter view. A flat moss-green
+  > (#6F8A6A) top, a jagged dark basalt (#3A3A48) rock underside tapering to a sharp point, one tiny
+  > slender limestone tower on top, and one glowing warm-gold (#FFCF7A) diamond-shaped ember hovering
+  > just above the tower. Chunky pixel-art style on a 32×32 grid with clean hard edges, a limited palette
+  > (at most 6 colours), and a thick dark outline (#0B1030) so it reads at tiny sizes. Centred, filling
+  > about 80% of the canvas, on a transparent background.
+- **Aspect / resolution:** 1:1, **1024×1024** (upscale the 32×32 pixel grid with nearest-neighbour, never
+  smoothing).
+- **Transparency:** Yes.
+- **Negative:** global + `text, letters, monogram, gradients, soft shading, thin lines, background scene,
+  multiple islands, characters`
+- **Check before exporting:** shrink it to 16×16. If the ember and the floating silhouette aren't both
+  readable, simplify: drop the tower before you drop the ember.
+
+### B03 — Favicon set
+- **Filename / path:**
+  - `public/favicon.ico`: 16, 32 and 48 px layers in one file (any converter).
+  - `public/favicon.png`: 32×32.
+  - `public/favicon.svg` (optional): a hand-traced vector of the mark. It stays crisp at any size.
+- **Source:** B02, downscaled with **nearest-neighbour** (keeps the pixel art sharp).
+- **Transparency:** Yes.
+- **Integration:** in `index.html`, replace the current icon line with
+  `<link rel="icon" href="/favicon.ico" sizes="48x48">` and `<link rel="icon" type="image/png" sizes="32x32"
+  href="/favicon.png">` (plus `<link rel="icon" type="image/svg+xml" href="/favicon.svg">` if you made it).
+
+### B04 — Apple touch icon
+- **Filename / path:** `public/apple-touch-icon.png`
+- **Where:** iPhone and iPad home screens and Safari bookmarks.
+- **Prompt:** none. Composite B02 onto an opaque background: a vertical gradient from `#2A1F4F` (top) to
+  `#E0705A` (bottom 15%, a thin ember-horizon band). Scale the mark to about 70% of the canvas, centred.
+- **Aspect / resolution:** **180×180**.
+- **Transparency:** **No.** iOS fills transparent pixels with black. Don't round the corners; iOS does it.
+
+### B05 — PWA / Android icons
+- **Filename / path:**
+  - `public/icons/icon-192.png`: 192×192, B04 style.
+  - `public/icons/icon-512.png`: 512×512, B04 style.
+  - `public/icons/icon-maskable-512.png`: 512×512, same background. The mark must sit inside the centre
+    **80% circle** (409 px), because Android crops it to circles, squircles and teardrops.
+- **Transparency:** No.
+- **Integration:** in `public/manifest.json`, set:
+  - `"background_color": "#0B1030"`
+  - `"theme_color": "#0B1030"`
+  - `icons`:
+    `[{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }, { "src":
+    "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }, { "src":
+    "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }]`
+
+  Also change `<meta name="theme-color">` in `index.html` to `#0B1030`.
+
+### B06 — GitHub repo social preview and LinkedIn banner (optional)
+- **Filename / path:** `docs/brand/github_social_1280x640.png` and `docs/brand/linkedin_banner_1584x396.png`
+  (not shipped by the site).
+- **Where:**
+  - GitHub repo → Settings → Social preview.
+  - LinkedIn profile → background photo.
+- **Prompt:** reuse the B01 plate prompt. For LinkedIn, ask for an **ultra-wide 4:1 panorama**. Keep the
+  islands in the **right 60%**: LinkedIn puts your profile photo over the bottom-left, and phones crop
+  the sides.
+- **Overlay:**
+  - GitHub: the same type as B01, scaled to 1280×640.
+  - LinkedIn: no name; it's already on the page. At most add `mihirgupta.dev` small in the bottom-right.
+- **Transparency:** No.
+
+### Brand checklist
+1. Generate B01 and B02. Every other file in this section is derived from those two.
+2. Export the sizes above, then run `npx @squoosh/cli --oxipng {}` (or TinyPNG) over the PNGs.
+3. Make the `index.html` and `manifest.json` edits listed under B03 and B05.
+4. After deploying, check previews with the LinkedIn Post Inspector
+   (`linkedin.com/post-inspector`) and opengraph.xyz. LinkedIn caches old images; the inspector
+   refreshes them.
+
+**Priority order:** B01 → B02 → B04 → B03 → B05 → B06.
