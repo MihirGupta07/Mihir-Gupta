@@ -16,6 +16,9 @@ import metaImage from './meta-image.png';
 import gitwizzImage from './gitwizz.png';
 import geohideImage from './geohide.png';
 import caloImage from './calo.png';
+import wizsyncImage from './wizsync.png';
+import luceImage from './luce.png';
+import beatrunnerImage from './beatrunner.png';
 export {
   mihirPhoto,
   backgroundImage,
@@ -33,5 +36,7 @@ export {
   gitwizzImage,
   geohideImage,
   caloImage,
-
+  wizsyncImage,
+  luceImage,
+  beatrunnerImage,
 };

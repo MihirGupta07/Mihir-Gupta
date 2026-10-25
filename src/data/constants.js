@@ -9,6 +9,10 @@ import {
   caloImage,
   gitwizzImage,
   wrapshareImage,
+  cashiraImage,
+  wizsyncImage,
+  luceImage,
+  beatrunnerImage,
   resumePdf
 } from '@/assets/images';
 
@@ -17,7 +21,7 @@ export const PERSONAL_INFO = {
   title: "Software Engineer",
   tagline: "Senior full-stack engineer. Building AI-integrated systems, 0 → production → scale.",
   description:
-    "Founding engineer at two Bengaluru startups — architected 5 production platforms and a self-updating AI/RAG tool at Ivory, and built a B2B digital trade platform end-to-end at Almond. Full-stack in React, Next.js, and Node, with hands-on LLM and RAG systems work. Published research in AI encryption and cardiovascular disease prediction.",
+    "Founding engineer at two Bengaluru startups — architected 5 production platforms and a self-updating AI/RAG tool at Ivory, and built a B2B digital trade platform end-to-end at Almond. Full-stack in React, Next.js, and Node, with hands-on LLM and RAG systems work. Off the clock I ship things that run end-to-end: a shipped Windows desktop app, in-browser audio DSP, WebGL scroll films and multi-tenant AI SaaS. Published research in AI encryption and cardiovascular disease prediction.",
   email: "contact@mihirgupta.dev",
   phone: "", // optional – add if you want it public
   location: "Bengaluru, India",
@@ -55,12 +59,15 @@ export const SKILLS = {
     { name: "Redux", level: 80, icon: "🔁" },
     { name: "Zustand", level: 80, icon: "🐻" },
     { name: "React Native", level: 75, icon: "📱" },
+    { name: "Three.js / WebGL", level: 70, icon: "🧊" },
+    { name: "GSAP", level: 75, icon: "✨" },
     { name: "Tailwind CSS", level: 90, icon: "💨" },
     { name: "HTML5", level: 95, icon: "🟠" },
     { name: "CSS3", level: 90, icon: "🎨" },
   ],
   backend: [
     { name: "Node.js", level: 85, icon: "🟢" },
+    { name: "Python", level: 80, icon: "🐍" },
     { name: "tRPC", level: 75, icon: "🔗" },
     { name: "Socket.io", level: 80, icon: "🔌" },
     { name: "PostgreSQL", level: 75, icon: "🐘" },
@@ -88,50 +95,88 @@ export const SKILLS = {
 export const PROJECTS = [
   {
     id: 1,
+    title: "WiZ Sync",
+    description:
+      "Free Windows desktop app that syncs Philips WiZ smart bulbs to whatever your PC is playing. Real-time WASAPI loopback capture, beat/drop detection and bass-driven colour over local UDP — no microphone, no cloud, no account.",
+    image: wizsyncImage,
+    technologies: ["Python", "Tkinter", "WASAPI", "DSP", "Inno Setup", "WinGet"],
+    liveUrl: "https://github.com/MihirGupta07/wiz-sync/releases/latest",
+    githubUrl: "https://github.com/MihirGupta07/wiz-sync",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Luce",
+    description:
+      "Voice-first AI sales OS for B2B field teams — Kanban CRM, Gmail/Calendar intelligence, a permission-checked AI assistant and a geo field planner. Multi-tenant by construction, with every query scoped to the org.",
+    image: luceImage,
+    technologies: ["Next.js 15", "TypeScript", "MongoDB", "Cloudflare R2", "Google APIs", "Claude / GPT / Gemini"],
+    liveUrl: "https://luce-pearl.vercel.app",
+    featured: true,
+  },
+  {
+    id: 3,
+    title: "Beat Runner",
+    description:
+      "Your MP3 is the level. Analyses tempo, beats, onsets and sections entirely in the browser, then generates a side-scrolling runner course synced to the track. No backend, no uploads, procedural art, offline-capable PWA.",
+    image: beatrunnerImage,
+    technologies: ["TypeScript", "Phaser", "Web Audio API", "Web Workers", "PWA", "Vite"],
+    liveUrl: "https://beat-runner-gamma.vercel.app",
+    featured: true,
+  },
+  {
+    id: 4,
     title: "GeoHide",
     description:
       "Real-time multiplayer hide-and-seek played inside Google Street View. Server-authoritative Socket.io game engine with anti-cheat design, shipped across web and native iOS/Android.",
     image: geohideImage,
     technologies: ["Next.js", "Socket.io", "MongoDB", "React Native", "Docker"],
     liveUrl: "https://geohide.in",
-    // githubUrl: "https://github.com/MihirGupta07/geohide",
     featured: true,
   },
   {
-    id: 2,
+    id: 5,
     title: "calo",
     description:
       "AI-powered calorie and macro tracker built for the Indian market. Multi-provider LLM pipeline (Gemini/Groq) with confidence-scored nutrition estimates and an offline-first PWA.",
     image: caloImage,
-    technologies: ["Next.js","LLM APIs", "Gemini", "Groq", "MongoDB", "PWA"],
+    technologies: ["Next.js", "LLM APIs", "Gemini", "Groq", "MongoDB", "PWA"],
     liveUrl: "https://calo.mihirgupta.dev",
-    // githubUrl: "https://github.com/MihirGupta07/calo",
     featured: true,
   },
   {
-    id: 3,
+    id: 7,
     title: "Kairos",
     description:
       "Multi-tenant AI sales platform that extracts objections from call transcripts, drafts rebuttal playbooks, and plans geo-optimized field visit routes.",
     image: kairosImage,
     technologies: ["Next.js", "MongoDB", "LLM APIs", "Google Routes API", "RazorPay"],
     liveUrl: "https://kairos.mihirgupta.dev",
-    // githubUrl: "https://github.com/MihirGupta07/specktr",
-    featured: true,
+    featured: false,
   },
   {
-    id: 4,
+    id: 8,
     title: "GitWizz",
     description:
       "Interactive Git-learning platform with a custom D3.js commit-graph engine and a guardrailed AI tutor for hands-on lessons on rebase, cherry-pick, and more.",
     image: gitwizzImage,
     technologies: ["Next.js", "D3.js", "Groq", "MongoDB"],
     liveUrl: "https://git-wizz.vercel.app/",
-    // githubUrl: "https://github.com/MihirGupta07/learn-git",
-    featured: true,
+    featured: false,
   },
   {
-    id: 5,
+    id: 9,
+    title: "Cashira",
+    description:
+      "Offline-first money tracking PWA — Google auth, income/expense ledger, charted dashboards and background sync, installable on mobile and desktop.",
+    image: cashiraImage,
+    technologies: ["Next.js", "Firebase", "Firestore", "Chart.js", "PWA", "Tailwind CSS"],
+    liveUrl: "https://cashira.vercel.app",
+    githubUrl: "https://github.com/MihirGupta07/cashira",
+    featured: false,
+  },
+  {
+    id: 10,
     title: "Wrapshare",
     description:
       "Spotify Wrapped, on demand — generates shareable story-format recaps with Razorpay-powered payments and serverless image rendering.",
@@ -142,13 +187,13 @@ export const PROJECTS = [
     featured: false,
   },
   {
-    id: 6,
+    id: 11,
     title: "Qestra",
     description:
       "Governed multi-agent AI orchestrator — approval-gated execution, encrypted BYOK credentials, and full audit trails for enterprise AI agents.",
     image: qestraImage,
     technologies: ["Fastify", "Next.js", "MongoDB", "Redis", "Docker"],
-    liveUrl: "",
+    liveUrl: "https://qestra.vercel.app",
     githubUrl: "https://github.com/MihirGupta07/Qestra",
     featured: false,
   },
@@ -283,8 +328,8 @@ export const FUN_FACTS = [
 
 // Statistics for the About section
 export const STATS = [
-  { label: "Years of Experience", value: "3+" },
-  { label: "Projects Completed", value: "20+" },
+  { label: "Years of Experience", value: "4+" },
+  { label: "Projects Completed", value: "30+" },
   { label: "Research Papers Published", value: "2" },
   { label: "Code Commits", value: "2000+" },
 ];
