@@ -59,6 +59,7 @@ export const MODELS = {
   colosseum: '/world/models/colosseum.glb',
   tholos: '/world/models/tholos.glb', // diorama base, pond and trees stripped
   cypress: '/world/models/cypress.glb',
+  allay: '/world/models/allay.glb', // player avatar
 };
 
 export const CREDITS = [
@@ -66,6 +67,7 @@ export const CREDITS = [
   { what: 'Desert Fortress Towers', who: 'nkilstrup', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/368813c939494eb0b0d63fa634b03589' },
   { what: 'Colosseum', who: 'Alexander Leth', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/c3c5157559344c74b2c0bacc89036692' },
   { what: 'Greek Tholos', who: 'Nicole (nicolioos)', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/b4fbe06384ba439e93643fc8818e5da4' },
+  { what: 'Allay (redesigned)', who: 'Master Galanodel', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/65a09bda6056476fa333d9cd4bed5920' },
   { what: 'Cypress tree', who: 'ElectroNick', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/249d8cb553a8469e9d645713f8e96ed1' },
 ];
 

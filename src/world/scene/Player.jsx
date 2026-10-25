@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { Suspense, useEffect, useMemo, useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useAnimations, useGLTF } from '@react-three/drei';
 import { rig, getState, setState } from '../store';
 import { interact } from '../actions';
+import { MODELS } from '../assets/manifest';
 import { groundAt, COLLIDERS, WORLD_RADIUS, PEDESTALS, ISLANDS, destById, SECRET } from '../data';
 
 const damp = THREE.MathUtils.damp;
@@ -42,6 +44,8 @@ export default function Player() {
   const viewX = useRef(0);
   const wisp = useRef();
   const light = useRef();
+  const heading = useRef(Math.PI);
+  const lastPos = useRef(new THREE.Vector3());
 
   useEffect(() => {
     const el = gl.domElement;
@@ -162,8 +166,13 @@ export default function Player() {
     // ---- avatar
     if (wisp.current) {
       wisp.current.position.set(p.x, p.y + Math.sin(t * 2) * 0.12, p.z);
-      wisp.current.rotation.y += dt * 0.8;
+      // face the way it's moving; when still, keep the last heading
+      const mx = rig.travel ? p.x - lastPos.current.x : vel.current.x, mz = rig.travel ? p.z - lastPos.current.z : vel.current.z;
+      if (Math.hypot(mx, mz) > (rig.travel ? 1e-3 : 0.5)) heading.current = Math.atan2(mx, mz);
+      wisp.current.rotation.y = angleLerp(wisp.current.rotation.y, heading.current, Math.min(1, dt * 8));
     }
+    lastPos.current.copy(p);
+    rig.moving = rig.travel !== null || Math.hypot(vel.current.x, vel.current.z) > 0.5;
     if (light.current) light.current.intensity = 14 + rig.pulse * 40;
 
     // ---- proximity
@@ -215,16 +224,30 @@ export default function Player() {
 
   return (
     <group ref={wisp}>
-      <mesh>
-        <icosahedronGeometry args={[0.28, 1]} />
-        <meshBasicMaterial color={new THREE.Color(3.2, 2.6, 1.8)} toneMapped={false} />
-      </mesh>
-      <mesh rotation-x={Math.PI / 2}>
-        <torusGeometry args={[0.55, 0.025, 6, 40]} />
-        <meshBasicMaterial color={new THREE.Color(2, 1.6, 1)} toneMapped={false} transparent opacity={0.7} />
-      </mesh>
-      <pointLight ref={light} color="#FFD9A0" distance={14} decay={1.6} position-y={0.4} />
+      <Suspense fallback={null}><Allay /></Suspense>
+      <pointLight ref={light} color="#A8E4FF" distance={14} decay={1.6} position-y={2.6} />
     </group>
   );
 }
 
+
+// Allay (redesigned) by Master Galanodel, CC BY 4.0. Pixel-art texture, so sample it unfiltered.
+function Allay() {
+  const { scene, animations } = useGLTF(MODELS.allay);
+  const { actions } = useAnimations(animations, scene);
+  const playing = useRef(null);
+  useMemo(() => scene.traverse((o) => {
+    if (!o.isMesh) return;
+    const m = o.material;
+    if (m.map) { m.map.magFilter = THREE.NearestFilter; m.map.minFilter = THREE.NearestFilter; m.map.needsUpdate = true; }
+    m.emissive = new THREE.Color('#9FDcff'); m.emissiveMap = m.map; m.emissiveIntensity = 0.18; // allays glow, faintly
+  }), [scene]);
+  useFrame(() => {
+    const name = rig.moving ? 'animation.master_galanodels_allay.fly' : 'animation.master_galanodels_allay.idle';
+    if (playing.current === name) return;
+    actions[playing.current]?.fadeOut(0.3);
+    actions[name]?.reset().fadeIn(0.3).play();
+    playing.current = name;
+  });
+  return <primitive object={scene} scale={1.6} position-y={-0.75} />;
+}

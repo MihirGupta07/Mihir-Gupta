@@ -38,6 +38,7 @@ export const rig = {
   stick: { x: 0, y: 0 }, // touch joystick, -1..1 each axis (y down = backward)
   intro: 0, // 0..1 intro flight progress
   pulse: 0, // light pulse on arrival/discovery
+  moving: false, // avatar is flying (drives its animation)
   pathPulse: 0, // every bridge flares (landing stone easter egg)
 };
 
