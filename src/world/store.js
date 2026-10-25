@@ -7,6 +7,7 @@ let state = {
   panel: null, // { type: 'about'|'projects'|'experience'|'research'|'contact'|'home'|'darkroom', slug? }
   nearby: null, // { kind: 'dest'|'project'|'secret', id, name, color }
   visited: [],
+  embers: 0, // trail embers collected
   tourStep: null,
   audio: false,
   onboarding: false,

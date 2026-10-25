@@ -151,6 +151,9 @@
 .hud-progress span[data-on] { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--c); opacity: 0.6; }
 .hud-progress span[data-on='true'] { background: var(--c); opacity: 1; box-shadow: 0 0 10px var(--c); }
 .hud-progress__t { margin-left: 6px; font: var(--t-label-sm); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+/* remounts on every pickup (keyed by count), so the pop replays */
+.hud-embers { display: inline-block; margin-left: 10px; color: var(--gold); text-shadow: 0 0 8px var(--gold); animation: ember-pop 0.45s var(--ease); }
+@keyframes ember-pop { from { transform: scale(1.6); opacity: 0.4; } }
 
 .hud-prompt {
   position: absolute; left: 50%; bottom: 40px; z-index: 25; transform: translateX(-50%);

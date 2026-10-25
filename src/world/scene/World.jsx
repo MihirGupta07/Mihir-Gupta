@@ -6,6 +6,7 @@ import Sky from './Sky';
 import CloudSea from './CloudSea';
 import Islands from './Islands';
 import Bridges from './Bridges';
+import Embers from './Embers';
 import Landmarks from './Landmarks';
 import Atmosphere from './Atmosphere';
 import Player from './Player';
@@ -56,7 +57,7 @@ export default function World({ quality }) {
       <Sky />
       <CloudSea />
       {/* separate boundaries: a chunk that suspends (re)loading blanks only itself, not the whole world */}
-      <Suspense fallback={null}><Islands quality={quality} /><Bridges /></Suspense>
+      <Suspense fallback={null}><Islands quality={quality} /><Bridges /><Embers /></Suspense>
       <Suspense fallback={null}><Landmarks /></Suspense>
       <Suspense fallback={null}><Atmosphere quality={quality} /></Suspense>
       <Suspense fallback={null}><Ready /></Suspense>

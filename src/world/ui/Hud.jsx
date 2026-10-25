@@ -140,6 +140,7 @@ export default function Hud({ onClassic }) {
   const audio = useWorld((s) => s.audio);
   const tourStep = useWorld((s) => s.tourStep);
   const visitedCount = useWorld((s) => s.visited.filter((v) => TOUR.includes(v)).length);
+  const embers = useWorld((s) => s.embers);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -183,7 +184,8 @@ export default function Hud({ onClassic }) {
 
       <p className="hud-progress" aria-label={`${visitedCount} of 5 places discovered`}>
         {TOUR.map((id) => <span key={id} style={{ '--c': destById[id].color }} data-on={getState().visited.includes(id)} />)}
-        <span className="hud-progress__t">{visitedCount === 5 ? 'Every region discovered — the Beacon burns brighter' : `${visitedCount}/5 discovered`}</span>
+        <span className="hud-progress__t">{visitedCount === 5 ? 'Every region discovered — the Beacon burns brighter' : `${visitedCount}/5 discovered · follow the embers`}</span>
+        {embers > 0 && <span className="hud-progress__t hud-embers" key={embers}>✦ {embers}</span>}
       </p>
 
       {nearby && !panel && nearby.id !== 'home' && tourStep === null && (
