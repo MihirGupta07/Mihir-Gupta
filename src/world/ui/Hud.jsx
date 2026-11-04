@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Compass, HelpCircle, LayoutList, Map as MapIcon, Volume2, VolumeX } from 'lucide-react';
+import { ArrowDown, ArrowUp, Compass, HelpCircle, LayoutList, Map as MapIcon, Volume2, VolumeX } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data/constants';
 import { useWorld, setState, getState, rig } from '../store';
 import { DESTINATIONS, ISLANDS, BRIDGES, islandById, destById, SECRET } from '../data';
@@ -63,6 +63,7 @@ function Onboarding() {
       <h2 id="onboard-t">How to explore</h2>
       <dl>
         <div><dt><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / arrows</dt><dd>Move. Hold <kbd>Shift</kbd> to go faster</dd></div>
+        <div><dt><kbd>Space</kbd> / <kbd>Ctrl</kbd> or <kbd>C</kbd></dt><dd>Fly up / down. On a phone, use the arrow buttons</dd></div>
         <div><dt>Drag</dt><dd>Look around</dd></div>
         <div><dt>Scroll / pinch</dt><dd>Move the camera closer or farther</dd></div>
         <div><dt>Click</dt><dd>Travel to any landmark or spot on the ground</dd></div>
@@ -133,6 +134,26 @@ function Joystick() {
   );
 }
 
+// Touch-only fly up/down buttons, held like the stick (CSS hides them unless the primary pointer is coarse).
+function LiftButtons() {
+  useEffect(() => () => { rig.lift = 0; }, []);
+  const hold = (dir) => ({
+    onPointerDown: (e) => {
+      rig.lift = dir; rig.travel = null;
+      try { e.currentTarget.setPointerCapture(e.pointerId); } catch { /* pointer already gone */ }
+    },
+    onPointerUp: () => { rig.lift = 0; },
+    onPointerCancel: () => { rig.lift = 0; },
+    onContextMenu: (e) => e.preventDefault(), // a long press would otherwise open the menu mid-flight
+  });
+  return (
+    <div className="lift">
+      <button type="button" aria-label="Fly up" {...hold(1)}><ArrowUp size={24} aria-hidden /></button>
+      <button type="button" aria-label="Fly down" {...hold(-1)}><ArrowDown size={24} aria-hidden /></button>
+    </div>
+  );
+}
+
 export default function Hud({ onClassic }) {
   const phase = useWorld((s) => s.phase);
   const nearby = useWorld((s) => s.nearby);
@@ -196,6 +217,7 @@ export default function Hud({ onClassic }) {
 
       <Minimap />
       {!panel && <Joystick />}
+      {!panel && <LiftButtons />}
       <TourCard />
       <Onboarding />
     </>

@@ -21,6 +21,9 @@ const INTRO_LOOK = new THREE.CatmullRomCurve3([
 ]);
 export const INTRO_SECONDS = 5;
 
+const MAX_ALTITUDE = 70;
+const MIN_ALTITUDE = -12; // never drops into the clouds
+
 function nearbyAt(x, z) {
   for (const p of PEDESTALS) {
     if (Math.hypot(x - p.x, z - p.z) < 4.2) return { kind: 'project', id: p.slug, name: p.project.title, color: p.color };
@@ -46,6 +49,7 @@ export default function Player() {
   const light = useRef();
   const heading = useRef(Math.PI);
   const lastPos = useRef(new THREE.Vector3());
+  const airborne = useRef(false); // flying under the player's control, not following the ground
 
   useEffect(() => {
     const el = gl.domElement;
@@ -73,9 +77,13 @@ export default function Player() {
     const kd = (e) => {
       if (typing(e) || getState().phase !== 'explore') return;
       const k = e.key.toLowerCase();
-      if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'shift'].includes(k) && !getState().panel) {
+      // Space still presses a button reached by keyboard, and the one in the controls dialog
+      if (k === ' ' && (getState().onboarding || e.target.matches?.('button:focus-visible'))) return;
+      if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'shift', ' ', 'control', 'c'].includes(k) && !getState().panel) {
         keys.current.add(k);
-        if (k.startsWith('arrow')) e.preventDefault();
+        // Ctrl is held to descend, so stop Ctrl+A/S/D reaching the browser. It won't let us stop Ctrl+W, hence C.
+        if (k.startsWith('arrow') || k === ' ' || (e.ctrlKey && 'asd'.includes(k))) e.preventDefault();
+        if (k === ' ') document.activeElement?.blur?.(); // a clicked button keeps focus and would catch the next press
         rig.travel = null; // taking control cancels any auto-travel
       }
       if (k === 'e' || (k === 'enter' && e.target === document.body)) interact();
@@ -137,6 +145,8 @@ export default function Player() {
     const len = Math.max(1, Math.hypot(ix, iz)); // caps diagonals; a half-pushed stick walks at half speed
     vel.current.x = damp(vel.current.x, wantX / len, 6, dt);
     vel.current.z = damp(vel.current.z, wantZ / len, 6, dt);
+    const lift = THREE.MathUtils.clamp((k.has(' ') ? 1 : 0) - (k.has('control') || k.has('c') ? 1 : 0) + rig.lift, -1, 1);
+    vel.current.y = damp(vel.current.y, lift * speed * 0.8, 6, dt);
 
     const p = rig.pos;
     if (rig.travel) {
@@ -146,19 +156,30 @@ export default function Player() {
       p.lerpVectors(tr.from, tr.to, e);
       p.y += Math.sin(Math.PI * e) * Math.min(9, tr.from.distanceTo(tr.to) * 0.12);
       rig.yaw = angleLerp(tr.yaw0, tr.yaw1, ease(Math.min(1, tr.t * 1.3)));
+      airborne.current = false;
+      vel.current.y = 0;
       if (tr.t >= 1) { rig.travel = null; tr.onArrive?.(); }
     } else {
       p.x += vel.current.x * dt;
       p.z += vel.current.z * dt;
-      for (const [cx, cz, r] of COLLIDERS) {
+      for (const [cx, cz, r, top] of COLLIDERS) {
+        if (p.y > top) continue;
         const dx = p.x - cx, dz = p.z - cz, d = Math.hypot(dx, dz), min = r + 0.7;
         if (d < min && d > 0.0001) { p.x = cx + (dx / d) * min; p.z = cz + (dz / d) * min; }
       }
       const r = Math.hypot(p.x + 10, p.z + 60);
       if (r > WORLD_RADIUS) { p.x = -10 + ((p.x + 10) / r) * WORLD_RADIUS; p.z = -60 + ((p.z + 60) / r) * WORLD_RADIUS; }
       const g = groundAt(p.x, p.z);
-      // over open air the wisp keeps its altitude; it never drops into the clouds
-      p.y = damp(p.y, g !== null ? g + 1.4 : Math.max(p.y, -12), 5, dt);
+      const floor = g !== null ? g + 1.4 : MIN_ALTITUDE;
+      if (lift) airborne.current = true;
+      if (airborne.current) {
+        // holds its altitude until told otherwise; drifting into an island's side lifts it onto the top
+        p.y = p.y >= floor ? THREE.MathUtils.clamp(p.y + vel.current.y * dt, floor, MAX_ALTITUDE) : damp(p.y, floor, 5, dt);
+        if (g !== null && p.y <= floor + 0.01 && lift <= 0) { airborne.current = false; vel.current.y = 0; } // landed
+      } else {
+        // over open air the wisp keeps its altitude; it never drops into the clouds
+        p.y = damp(p.y, g !== null ? floor : Math.max(p.y, MIN_ALTITUDE), 5, dt);
+      }
     }
 
     rig.pulse = Math.max(0, rig.pulse - dt * 0.8);
@@ -172,7 +193,7 @@ export default function Player() {
       wisp.current.rotation.y = angleLerp(wisp.current.rotation.y, heading.current, Math.min(1, dt * 8));
     }
     lastPos.current.copy(p);
-    rig.moving = rig.travel !== null || Math.hypot(vel.current.x, vel.current.z) > 0.5;
+    rig.moving = rig.travel !== null || vel.current.length() > 0.5;
     if (light.current) light.current.intensity = 14 + rig.pulse * 40;
 
     // ---- proximity

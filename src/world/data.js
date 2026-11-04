@@ -82,14 +82,14 @@ export function groundAt(x, z) {
   return best;
 }
 
-// Solid things the player slides around: [x, z, radius]
+// Solid things the player slides around: [x, z, radius, top]. Fly above `top` to pass over them.
 export const COLLIDERS = [
-  [islandById.tower.x, islandById.tower.z, 2.6],
-  [islandById.citadel.x, islandById.citadel.z, 7],
-  [islandById.observatory.x, islandById.observatory.z, 4.6],
-  [islandById.beacon.x, islandById.beacon.z, 1.6],
-  [nexus.x, nexus.z, 3.2],
-  ...PEDESTALS.map((p) => [p.x, p.z, 1.1]),
+  [islandById.tower.x, islandById.tower.z, 2.6, islandById.tower.y + 38],
+  [islandById.citadel.x, islandById.citadel.z, 7, islandById.citadel.y + 11],
+  [islandById.observatory.x, islandById.observatory.z, 4.6, islandById.observatory.y + 11],
+  [islandById.beacon.x, islandById.beacon.z, 1.6, islandById.beacon.y + 33],
+  [nexus.x, nexus.z, 3.2, nexus.y + 6],
+  ...PEDESTALS.map((p) => [p.x, p.z, 1.1, nexus.y + 6]),
 ];
 
 export const WORLD_RADIUS = 175;

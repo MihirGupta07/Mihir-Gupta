@@ -36,6 +36,7 @@ export const rig = {
   distance: 13,
   travel: null, // { from, to, t, dur, onArrive }
   stick: { x: 0, y: 0 }, // touch joystick, -1..1 each axis (y down = backward)
+  lift: 0, // touch up/down buttons: 1 up, -1 down, 0 neither
   intro: 0, // 0..1 intro flight progress
   pulse: 0, // light pulse on arrival/discovery
   moving: false, // avatar is flying (drives its animation)

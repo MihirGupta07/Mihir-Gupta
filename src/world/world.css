@@ -186,11 +186,24 @@
   background: rgba(237, 230, 218, 0.18); border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent);
   box-shadow: 0 0 14px -4px var(--gold); pointer-events: none;
 }
+/* touch fly up/down: phones and tablets only. Sits above the centred Enter prompt, which can run the full width */
+.lift { display: none; position: absolute; right: 24px; bottom: 244px; z-index: 25; flex-direction: column; gap: 12px; }
+.lift button {
+  display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; color: var(--paper);
+  background: rgba(9, 10, 24, 0.45); border: 1px solid var(--rule); touch-action: none;
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+.lift button:active { background: rgba(237, 230, 218, 0.18); border-color: color-mix(in srgb, var(--gold) 60%, transparent); }
 @media (pointer: coarse) {
   .joystick { display: block; }
+  .lift { display: flex; }
   .hud-prompt { bottom: 188px !important; }
   /* the stick owns the bottom-left corner on touch screens (landscape phones still show the minimap) */
   .minimap { left: auto; right: 24px; width: 140px; }
+}
+/* landscape phones are too short to stack above the minimap: sit beside it instead */
+@media (pointer: coarse) and (orientation: landscape) {
+  .lift { right: 180px; bottom: 24px; }
 }
 
 .tour, .onboard {
