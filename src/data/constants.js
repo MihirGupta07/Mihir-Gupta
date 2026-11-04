@@ -13,6 +13,7 @@ import {
   wizsyncImage,
   luceImage,
   beatrunnerImage,
+  vowsImage,
   resumePdf
 } from '@/assets/images';
 
@@ -195,6 +196,17 @@ export const PROJECTS = [
     technologies: ["Fastify", "Next.js", "MongoDB", "Redis", "Docker"],
     liveUrl: "https://qestra.vercel.app",
     githubUrl: "https://github.com/MihirGupta07/Qestra",
+    featured: false,
+  },
+  {
+    id: 12,
+    title: "vows.rsvp",
+    description:
+      "Digital wedding invitation platform with ten destination-inspired design worlds. Each guest gets a personal link showing only the events they're invited to, with per-event RSVP, schedules, venues and galleries, built mobile-first and rendered from a single wedding data model.",
+    image: vowsImage,
+    technologies: ["Next.js", "TypeScript", "MongoDB", "Cloudflare R2", "Tailwind CSS", "Playwright"],
+    liveUrl: "https://www.vows.rsvp",
+    githubUrl: "",
     featured: false,
   },
 ];

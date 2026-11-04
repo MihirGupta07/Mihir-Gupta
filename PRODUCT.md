@@ -45,7 +45,7 @@ A founding engineer who takes AI-integrated products from 0 to production and sc
 
 ## Evidence on Hand
 
-- Projects: 10 shipped projects with titles, stacks, descriptions, live/source links and real screenshots (`src/data/constants.js` `PROJECTS`, images in `src/assets/`).
+- Projects: 11 shipped projects with titles, stacks, descriptions, live/source links and real screenshots (`src/data/constants.js` `PROJECTS`, images in `src/assets/`).
 - Experience: 6 roles with dates, companies and bullet outcomes (`EXPERIENCE`); education (`EDUCATION`).
 - Research: 2 published papers — symmetric encryption with ANNs (IJEAT 2022) and cardiovascular risk prediction (IJSR 2023), with links (`RESEARCH`).
 - Stats, confirmed accurate: 4+ years of experience, 30+ projects completed, 2 research papers, 2000+ code commits (`STATS`).
