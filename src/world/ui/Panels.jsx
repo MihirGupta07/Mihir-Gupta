@@ -162,9 +162,10 @@ function Contact() {
 function Darkroom() {
   return (
     <>
-      <p className="pl-lead">You wandered off the paths and found it. Off the clock, I make photographs and write.</p>
+      <p className="pl-lead">You wandered off the paths and found it. Off the clock, I make photographs, write and chart what I listen to.</p>
       <div className="pl-actions">
         <Ext href={SOCIAL_LINKS.instagram} className="pl-btn">Photographs · @snapsbymihir</Ext>
+        <Ext href="https://spotify.mihirgupta.dev" className="pl-btn">Spotify dashboard</Ext>
         <Ext href={SOCIAL_LINKS.medium}>Writing on Medium</Ext>
       </div>
     </>
