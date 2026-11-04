@@ -183,7 +183,9 @@ export default function Player() {
     // ---- camera
     const { off, want, tgt, dir, ray } = tmp;
     tgt.set(p.x, p.y + 1.6, p.z);
-    const dist = panel ? Math.max(rig.distance, 16) : rig.distance;
+    // at a landmark, step back and tilt up so its top and label are in frame, not the ground at your feet
+    const atLandmark = n && n.id !== 'home';
+    const dist = panel ? Math.max(rig.distance, 16) : rig.distance + (atLandmark ? (camera.aspect < 1 ? 8 : 4) : 0); // phones have a taller header
     off.set(sy * Math.cos(rig.pitch), Math.sin(rig.pitch), cy * Math.cos(rig.pitch)).multiplyScalar(dist);
     want.copy(tgt).add(off);
     const floor = groundAt(want.x, want.z);
@@ -211,7 +213,7 @@ export default function Player() {
     const hit = ray.intersectObjects(solids.current.list, false)[0];
     if (hit) camera.position.copy(tgt).addScaledVector(dir, Math.max(0.6, hit.distance - 0.5));
     look.current.x = damp(look.current.x, tgt.x, 6, dt);
-    look.current.y = damp(look.current.y, tgt.y + (panel ? 3 : 0), 6, dt);
+    look.current.y = damp(look.current.y, tgt.y + (panel ? 3 : atLandmark ? 2 : 0), 6, dt);
     look.current.z = damp(look.current.z, tgt.z, 6, dt);
     camera.lookAt(look.current);
 

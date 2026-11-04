@@ -32,6 +32,7 @@ function mats() {
   return shared;
 }
 const glowMat = (hex, i = 1.5) => new THREE.MeshStandardMaterial({ color: '#000', emissive: srgb(hex), emissiveIntensity: i, toneMapped: false });
+const PORTAL = '#B57BFF'; // the Darkroom gate's own colour
 const distTo = (x, z) => Math.hypot(rig.pos.x - x, rig.pos.z - z);
 // 1 when the player is within `near`, 0 beyond `far`
 const proximity = (x, z, near, far) => 1 - smooth(distTo(x, z), near, far);
@@ -70,22 +71,25 @@ const clickable = (fn) => ({
 // Floating world label, also a real focusable button (keyboard + screen readers).
 function Label({ position, text, sub, color, onSelect, near = 30, far = 110 }) {
   const ref = useRef();
-  const wp = useMemo(() => new THREE.Vector3(...position), [position]);
+  const anchor = useRef();
+  const wp = useMemo(() => new THREE.Vector3(), []);
   useFrame(({ camera }) => {
-    if (!ref.current) return;
-    const d = camera.position.distanceTo(wp);
+    if (!ref.current || !anchor.current) return;
+    const d = camera.position.distanceTo(anchor.current.getWorldPosition(wp));
     const o = getState().phase !== 'explore' || getState().panel ? 0 : 1 - smooth(d, near, far);
     ref.current.style.opacity = o.toFixed(3);
     ref.current.style.pointerEvents = o > 0.15 ? 'auto' : 'none';
     ref.current.tabIndex = o > 0.15 ? 0 : -1;
   });
   return (
-    <Html position={position} center zIndexRange={[20, 0]} style={{ pointerEvents: 'none' }}>
-      <button ref={ref} className="world-label" style={{ '--c': color, opacity: 0 }} onClick={onSelect}>
-        <span className="world-label__name">{text}</span>
-        {sub && <span className="world-label__sub">{sub}</span>}
-      </button>
-    </Html>
+    <group ref={anchor} position={position}>
+      <Html center zIndexRange={[20, 0]} style={{ pointerEvents: 'none' }}>
+        <button ref={ref} className="world-label" style={{ '--c': color, opacity: 0 }} onClick={onSelect}>
+          <span className="world-label__name">{text}</span>
+          {sub && <span className="world-label__sub">{sub}</span>}
+        </button>
+      </Html>
+    </group>
   );
 }
 
@@ -104,6 +108,9 @@ function useLandmark(dest, { near = 14, far = 55, base = 0.9, boost = 2.6 } = {}
   return { i, glow, light, act };
 }
 
+// Small enough that the crown and label sit inside the follow camera's frame on arrival.
+const TOWER_SCALE = 0.33;
+
 function Tower() {
   const dest = destById.about;
   const { i, glow, light } = useLandmark(dest);
@@ -117,7 +124,7 @@ function Tower() {
   });
   const segs = [3.8, 3.3, 2.8, 2.3, 1.8];
   return (
-    <group position={[i.x, i.y, i.z]} rotation-y={face} {...clickable(() => travelTo('about'))}>
+    <group position={[i.x, i.y, i.z]} rotation-y={face} scale={TOWER_SCALE} {...clickable(() => travelTo('about'))}>
       <mesh material={m.stone} position-y={0.6} castShadow receiveShadow><boxGeometry args={[10, 1.2, 10]} /></mesh>
       {[0, 1, 2].map((s) => (
         <mesh key={s} material={m.stone} position={[0, 0.2 + s * 0.2 - 0.4, 5.4 + s * 0.7]} castShadow><boxGeometry args={[4, 0.4, 0.8]} /></mesh>
@@ -141,7 +148,7 @@ function Tower() {
         <mesh material={glow}><icosahedronGeometry args={[0.9, 1]} /></mesh>
       </group>
       <pointLight ref={light} color={dest.color} position-y={33} distance={60} decay={1.6} />
-      <Label position={[0, 42, 0]} text={dest.name} sub="About" color={dest.color} onSelect={() => travelTo('about')} />
+      <Label position={[0, 36, 0]} text={dest.name} sub="About" color={dest.color} onSelect={() => travelTo('about')} />
     </group>
   );
 }
@@ -253,58 +260,45 @@ function Nexus() {
           <mesh material={glow}><torusGeometry args={[14.4, 0.05, 6, 96]} /></mesh>
         </group>
         <pointLight ref={light} color={dest.color} position-y={6} distance={50} decay={1.5} />
-        <Label position={[0, 17, 0]} text={dest.name} sub="Projects" color={dest.color} onSelect={() => travelTo('projects')} far={150} />
+        <Label position={[0, 13, 0]} text={dest.name} sub="Projects" color={dest.color} onSelect={() => travelTo('projects')} far={150} />
       </group>
       {PEDESTALS.map((p, k) => <Pedestal key={p.slug} p={p} k={k} texture={textures[k]} />)}
     </group>
   );
 }
 
+const CITADEL_HEIGHT = 10; // keeps the spires and label in the follow camera's frame
+
 function Citadel() {
   const dest = destById.experience;
   const { i, light } = useLandmark(dest);
   const m = mats();
   const n = EXPERIENCE.length;
-  // base tier = earliest role, top tier = current role
-  const tierGlows = useMemo(() => EXPERIENCE.map(() => glowMat(dest.color, 1)), [dest.color]);
+  // one ground ring per role: outermost = earliest, innermost = current
+  const ringGlows = useMemo(() => EXPERIENCE.map(() => glowMat(dest.color, 1)), [dest.color]);
   const roles = useMemo(() => [...EXPERIENCE].reverse(), []);
   useFrame(() => {
     const focus = getState().focus;
     const near = proximity(i.x, i.z, 14, 55);
     roles.forEach((r, k) => {
-      const target = (0.7 + near * 1.6 + (focus === r.id ? 5 : 0)) * Math.min(1, rig.intro * 1.5);
-      tierGlows[k].emissiveIntensity += (target - tierGlows[k].emissiveIntensity) * 0.08;
+      const target = (0.35 + near * 0.5 + (focus === r.id ? 5 : 0)) * Math.min(1, rig.intro * 1.5);
+      ringGlows[k].emissiveIntensity += (target - ringGlows[k].emissiveIntensity) * 0.08;
     });
   });
-  const steps = useMemo(() => {
-    const mesh = new THREE.InstancedMesh(new THREE.BoxGeometry(1.4, 0.25, 0.7), mats().stone, 48);
-    const o = new THREE.Object3D();
-    for (let k = 0; k < 48; k++) {
-      const a = k * 0.42, r = 9.5 - (k / 48) * 4.5;
-      o.position.set(Math.cos(a) * r, k * (n * 4.4) / 48, Math.sin(a) * r);
-      o.rotation.y = -a;
-      o.updateMatrix();
-      mesh.setMatrixAt(k, o.matrix);
-    }
-    mesh.castShadow = true;
-    return mesh;
-  }, [n]);
   return (
-    <group position={[i.x, i.y, i.z]} {...clickable(() => travelTo('experience'))}>
+    <group position={[i.x, i.y, i.z]} rotation-y={Math.atan2(-i.x, -i.z)} {...clickable(() => travelTo('experience'))}>
+      <Model url={MODELS.citadel} height={CITADEL_HEIGHT} />
       {roles.map((r, k) => {
-        const s = 15 - k * 1.8;
+        const radius = 10.2 + (n - 1 - k) * (2.2 / Math.max(1, n - 1));
         return (
-          <group key={r.id} position-y={k * 4.4 + 2.1} rotation-y={k * 0.22}>
-            <mesh material={m.stone} castShadow receiveShadow><boxGeometry args={[s, 4.2, s]} /></mesh>
-            <mesh material={tierGlows[k]} position-y={1.9}><boxGeometry args={[s + 0.25, 0.18, s + 0.25]} /></mesh>
-            <mesh material={m.dark} position-y={-0.2}><boxGeometry args={[s + 0.06, 1.2, s * 0.5]} /></mesh>
-          </group>
+          <mesh key={r.id} material={ringGlows[k]} position-y={0.05} rotation-x={-Math.PI / 2}>
+            <ringGeometry args={[radius, radius + 0.1, 72]} />
+          </mesh>
         );
       })}
-      <primitive object={steps} />
-      <mesh material={tierGlows[n - 1]} position-y={n * 4.4 + 1.2}><octahedronGeometry args={[1.1, 0]} /></mesh>
-      <pointLight ref={light} color={dest.color} position-y={n * 4.4 + 3} distance={55} decay={1.6} />
-      <Label position={[0, n * 4.4 + 6, 0]} text={dest.name} sub="Experience" color={dest.color} onSelect={() => travelTo('experience')} />
+      <mesh material={m.stone} position-y={0.02} rotation-x={-Math.PI / 2} receiveShadow><circleGeometry args={[10, 48]} /></mesh>
+      <pointLight ref={light} color={dest.color} position-y={CITADEL_HEIGHT + 2} distance={55} decay={1.6} />
+      <Label position={[0, CITADEL_HEIGHT + 1.2, 0]} text={dest.name} sub="Experience" color={dest.color} onSelect={() => travelTo('experience')} />
     </group>
   );
 }
@@ -345,7 +339,7 @@ function Observatory() {
         })}
       </group>
       <pointLight ref={light} color={dest.color} position-y={9} distance={40} decay={1.6} />
-      <Label position={[0, 14, 0]} text={dest.name} sub="Research" color={dest.color} onSelect={() => travelTo('research')} />
+      <Label position={[0, 11, 0]} text={dest.name} sub="Research" color={dest.color} onSelect={() => travelTo('research')} />
     </group>
   );
 }
@@ -356,6 +350,8 @@ const beamMaterial = (hex) => new THREE.ShaderMaterial({
   vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
   fragmentShader: 'uniform vec3 uColor; uniform float uStrength; varying vec2 vUv; void main(){ float a = pow(max(vUv.y, 0.0), 2.2) * uStrength; gl_FragColor = vec4(uColor * a, a); }',
 });
+
+const BEACON_SCALE = 0.3; // same reason as TOWER_SCALE
 
 function Beacon() {
   const dest = destById.contact;
@@ -368,36 +364,38 @@ function Beacon() {
   useFrame(({ clock }) => {
     if (beamRef.current) beamRef.current.rotation.y = clock.elapsedTime * 0.35;
     const all = visited >= 5 ? 1 : 0; // every region discovered: the beacon flares
-    beam.uniforms.uStrength.value = (0.35 + act.current * 0.3 + all * 0.4) * Math.min(1, rig.intro * 1.5);
+    // the lamp is at eye level on the island now: ease the sweep up close or it whites out the view
+    beam.uniforms.uStrength.value = (0.35 - act.current * 0.25 + all * 0.15) * Math.min(1, rig.intro * 1.5);
     pillar.uniforms.uStrength.value = (0.12 + all * 0.35) * Math.min(1, rig.intro * 1.5);
   });
   return (
     <group position={[i.x, i.y, i.z]} {...clickable(() => travelTo('contact'))}>
-      <mesh material={m.stone} position-y={1} castShadow receiveShadow><cylinderGeometry args={[3.4, 3.8, 2, 20]} /></mesh>
-      {MODELS.towers ? <Model url={MODELS.towers} pick={['Pillar_Bulb']} height={30.2} position-y={2} /> : <>
-        <mesh material={m.stone} position-y={17} castShadow><cylinderGeometry args={[1.5, 2.4, 30, 20]} /></mesh>
-        {[8, 18, 28].map((y) => <mesh key={y} material={m.bronze} position-y={y}><cylinderGeometry args={[2.5 - y * 0.03, 2.5 - y * 0.03, 0.5, 20]} /></mesh>)}
-      </>}
-      <mesh material={m.bronze} position-y={32.2}><cylinderGeometry args={[2.4, 2.4, 0.3, 24]} /></mesh>
-      <mesh material={glow} position-y={33.6}><cylinderGeometry args={[1.25, 1.25, 2.4, 16]} /></mesh>
-      <mesh material={m.bronze} position-y={35.6}><coneGeometry args={[1.8, 1.8, 16]} /></mesh>
-      <group ref={beamRef} position-y={33.6}>
+      <group scale={BEACON_SCALE}>
+        <mesh material={m.stone} position-y={1} castShadow receiveShadow><cylinderGeometry args={[3.4, 3.8, 2, 20]} /></mesh>
+        {MODELS.towers ? <Model url={MODELS.towers} pick={['Pillar_Bulb']} height={30.2} position-y={2} /> : <>
+          <mesh material={m.stone} position-y={17} castShadow><cylinderGeometry args={[1.5, 2.4, 30, 20]} /></mesh>
+          {[8, 18, 28].map((y) => <mesh key={y} material={m.bronze} position-y={y}><cylinderGeometry args={[2.5 - y * 0.03, 2.5 - y * 0.03, 0.5, 20]} /></mesh>)}
+        </>}
+        <mesh material={m.bronze} position-y={32.2}><cylinderGeometry args={[2.4, 2.4, 0.3, 24]} /></mesh>
+        <mesh material={glow} position-y={33.6}><cylinderGeometry args={[1.25, 1.25, 2.4, 16]} /></mesh>
+        <mesh material={m.bronze} position-y={35.6}><coneGeometry args={[1.8, 1.8, 16]} /></mesh>
+      </group>
+      <group ref={beamRef} position-y={33.6 * BEACON_SCALE}>
         {[0, Math.PI].map((r) => (
           <mesh key={r} material={beam} rotation={[0, r, Math.PI / 2]} position-x={r ? -40 : 40}>
-            <cylinderGeometry args={[0.6, 7, 80, 24, 1, true]} />
+            <cylinderGeometry args={[0.3, 3.5, 80, 24, 1, true]} />
           </mesh>
         ))}
       </group>
       <mesh material={pillar} position-y={240}><cylinderGeometry args={[0.6, 0.6, 420, 12, 1, true]} /></mesh>
-      <pointLight ref={light} color={dest.color} position-y={33} distance={70} decay={1.4} />
-      <Label position={[0, 40, 0]} text={dest.name} sub="Contact" color={dest.color} onSelect={() => travelTo('contact')} far={180} />
+      <pointLight ref={light} color={dest.color} position-y={33 * BEACON_SCALE} distance={70} decay={1.4} />
+      <Label position={[0, 38 * BEACON_SCALE, 0]} text={dest.name} sub="Contact" color={dest.color} onSelect={() => travelTo('contact')} far={180} />
     </group>
   );
 }
 
-// The Landing: name stone, lamps, compass inlay. Clicking the stone lights every path (a small surprise).
-function Landing() {
-  const i = islandById.landing;
+// Name stone: small line, rule, big name broken before its last word. Text shrinks to fit the stone.
+function Board({ kicker, name, color, tint = [1.5, 1.5, 1.5], ...props }) {
   const m = mats();
   const tex = useMemo(() => {
     const c = document.createElement('canvas');
@@ -409,20 +407,73 @@ function Landing() {
   useEffect(() => {
     const draw = () => {
       const g = tex.image.getContext('2d');
+      const words = name.split(' ');
+      const lines = [words.slice(0, -1).join(' '), words[words.length - 1]];
+      const fit = (weight, max, texts) => {
+        g.font = `${weight} ${max}px Monocraft, monospace`;
+        const size = Math.min(max, (max * 1810) / Math.max(...texts.map((l) => g.measureText(l).width)));
+        g.font = `${weight} ${size}px Monocraft, monospace`;
+        return size;
+      };
       g.clearRect(0, 0, 2048, 1024);
-      g.fillStyle = '#FFDDA0';
+      g.fillStyle = color;
       g.textAlign = 'left';
-      g.font = '500 92px Monocraft, monospace';
-      g.fillText('SOFTWARE ENGINEER · BUILDER', 120, 230);
-      g.font = '600 300px Monocraft, monospace';
-      g.fillText(PERSONAL_INFO.name.split(' ')[0], 110, 560);
-      g.fillText(PERSONAL_INFO.name.split(' ').slice(1).join(' '), 110, 860);
+      fit(500, 92, [kicker]);
+      g.fillText(kicker, 120, 230);
+      const size = fit(600, 300, lines);
+      g.fillText(lines[0], 110, 860 - size);
+      g.fillText(lines[1], 110, 860);
       g.fillRect(120, 285, 520, 4);
       tex.needsUpdate = true;
     };
     draw();
     document.fonts?.load('600 300px Monocraft').then(draw);
-  }, [tex]);
+  }, [tex, kicker, name, color]);
+  return (
+    <group {...props}>
+      <mesh material={m.dark} position-y={2.6} castShadow receiveShadow><boxGeometry args={[8.4, 5.2, 0.9]} /></mesh>
+      <mesh position={[0, 2.6, 0.46]}>
+        <planeGeometry args={[7.8, 3.9]} />
+        <meshBasicMaterial map={tex} transparent toneMapped={false} color={new THREE.Color(...tint)} />
+      </mesh>
+      <mesh material={m.stone} position-y={0.15}><boxGeometry args={[9.4, 0.3, 1.8]} /></mesh>
+    </group>
+  );
+}
+
+// [destination, sideways from the arrival line, towards the arrival side, scale, height]: beside where travel drops you.
+const BOARDS = [
+  [destById.about, 5.6, 2.2, 0.6],
+  [destById.projects, 0, 0, 0.5, 5.6], // hovers over the core, above the ring of screens
+  [destById.experience, 7.5, 8, 0.62],
+  [destById.research, 4.8, 5.6, 0.5],
+  [destById.contact, 4.6, 3, 0.6],
+  [SECRET, -4.6, 2.2, 0.42],
+];
+
+function IslandBoards() {
+  return BOARDS.map(([d, x, z, s, y = 0]) => {
+    const i = islandById[d.island];
+    return (
+      <group key={d.id} position={[i.x, i.y, i.z]} rotation-y={Math.atan2(-i.x, -i.z)}>
+        <Board
+          kicker={(d.blurb ?? 'Undiscovered').replace(/\.$/, '').toUpperCase()}
+          name={d.name}
+          color={d.id === SECRET.id ? PORTAL : d.color}
+          position={[x, y, z]}
+          rotation-y={x ? -0.3 : 0}
+          scale={s}
+          {...clickable(() => travelTo(d.id))}
+        />
+      </group>
+    );
+  });
+}
+
+// The Landing: name stone, lamps, compass inlay. Clicking the stone lights every path (a small surprise).
+function Landing() {
+  const i = islandById.landing;
+  const m = mats();
   const lamps = useMemo(() => Array.from({ length: 7 }, (_, k) => {
     const a = Math.PI * 0.15 + (k / 6) * Math.PI * 0.7 + Math.PI;
     return [Math.cos(a) * 12, Math.sin(a) * -12];
@@ -432,14 +483,15 @@ function Landing() {
   useFrame(() => { inlay.emissiveIntensity = (1.2 + rig.pathPulse * 4) * Math.min(1, rig.intro * 1.5); });
   return (
     <group position={[i.x, i.y, i.z]}>
-      <group position={[-6.5, 0, -4]} rotation-y={0.35} {...clickable(() => { rig.pathPulse = 1; })}>
-        <mesh material={m.dark} position-y={2.6} castShadow receiveShadow><boxGeometry args={[8.4, 5.2, 0.9]} /></mesh>
-        <mesh position={[0, 2.6, 0.46]}>
-          <planeGeometry args={[7.8, 3.9]} />
-          <meshBasicMaterial map={tex} transparent toneMapped={false} color={new THREE.Color(1.6, 1.4, 1.1)} />
-        </mesh>
-        <mesh material={m.stone} position-y={0.15}><boxGeometry args={[9.4, 0.3, 1.8]} /></mesh>
-      </group>
+      <Board
+        kicker="SOFTWARE ENGINEER · BUILDER"
+        name={PERSONAL_INFO.name}
+        color="#FFDDA0"
+        tint={[1.6, 1.4, 1.1]}
+        position={[-6.5, 0, -4]}
+        rotation-y={0.35}
+        {...clickable(() => { rig.pathPulse = 1; })}
+      />
       <mesh material={inlay} position-y={0.03} rotation-x={-Math.PI / 2}><ringGeometry args={[4.2, 4.35, 64]} /></mesh>
       <mesh material={inlay} position-y={0.03} rotation-x={-Math.PI / 2}><ringGeometry args={[2.2, 2.26, 64]} /></mesh>
       {[0, 1, 2, 3].map((k) => (
@@ -455,18 +507,60 @@ function Landing() {
   );
 }
 
+// Le.Anh's Nether Island. Fractions are of the model's height, measured from its mesh.
+const NETHER_HEIGHT = 14;
+const NETHER_GROUND = 0.636 * NETHER_HEIGHT; // its netherrack surface sits on the island's walking height
+const GATE = [-0.0685 * NETHER_HEIGHT, 0.137 * NETHER_HEIGHT, -0.091 * NETHER_HEIGHT]; // centre of its portal
+
 function Darkroom() {
   const i = islandById.darkroom;
-  const m = mats();
-  const glow = useMemo(() => glowMat(SECRET.color, 2), []);
+  const face = Math.atan2(-i.x, -i.z); // the gate looks back along the way you arrive
   const open = () => travelTo('darkroom');
+  const { portal, halo } = useMemo(() => {
+    const haloCanvas = document.createElement('canvas');
+    haloCanvas.width = haloCanvas.height = 128;
+    const h = haloCanvas.getContext('2d');
+    const grad = h.createRadialGradient(64, 64, 0, 64, 64, 64);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.35, 'rgba(255,255,255,0.28)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    h.fillStyle = grad;
+    h.fillRect(0, 0, 128, 128);
+
+    return {
+      portal: new THREE.ShaderMaterial({
+        transparent: true, depthWrite: false, side: THREE.DoubleSide,
+        uniforms: { uTime: { value: 0 }, uStrength: { value: 0 } },
+        vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+        fragmentShader: `uniform float uTime; uniform float uStrength; varying vec2 vUv;
+          void main(){
+            vec2 p = floor(vUv * vec2(16.0, 24.0)) / vec2(16.0, 24.0);
+            vec2 c = (p - 0.5) * vec2(1.0, 1.5);
+            float v = sin(atan(c.y, c.x) * 3.0 + length(c) * 14.0 - uTime * 1.2) + sin(p.y * 20.0 + uTime * 0.7 + sin(p.x * 12.0 - uTime * 0.5) * 2.0);
+            v = 0.5 + 0.25 * v;
+            gl_FragColor = vec4(mix(vec3(0.16, 0.02, 0.42), vec3(0.85, 0.45, 1.7), v * v) * uStrength, 0.94);
+          }`,
+      }),
+      halo: new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(haloCanvas), color: srgb(PORTAL), blending: THREE.AdditiveBlending, transparent: true, depthWrite: false, toneMapped: false }),
+    };
+  }, []);
+  const light = useRef();
+  useFrame(({ clock, camera }) => {
+    const t = clock.elapsedTime, on = Math.min(1, rig.intro * 1.5);
+    const far = smooth(camera.position.distanceTo(tmpV.set(i.x, i.y, i.z)), 15, 60);
+    portal.uniforms.uTime.value = t;
+    portal.uniforms.uStrength.value = on;
+    halo.opacity = (0.08 + far * 0.45 + Math.sin(t * 0.6) * 0.04) * on;
+    if (light.current) light.current.intensity = (34 + Math.sin(t * 0.6) * 6) * on;
+  });
   return (
-    <group position={[i.x, i.y, i.z]} {...clickable(open)}>
-      {[-1.6, 1.6].map((x) => <mesh key={x} material={m.stone} position={[x, 2, 0]} castShadow><boxGeometry args={[0.7, 4, 0.7]} /></mesh>)}
-      <mesh material={m.stone} position-y={4.3}><boxGeometry args={[4.4, 0.6, 0.9]} /></mesh>
-      <mesh material={glow} position-y={2.2}><planeGeometry args={[2.3, 3.2]} /></mesh>
-      <pointLight color={SECRET.color} intensity={40} distance={20} position={[0, 3, 2]} />
-      <Label position={[0, 6, 0]} text={SECRET.name} sub="Undiscovered" color={SECRET.color} onSelect={open} near={14} far={40} />
+    <group position={[i.x, i.y, i.z]} rotation-y={face} {...clickable(open)}>
+      <Model url={MODELS.netherIsland} height={NETHER_HEIGHT} position-y={-NETHER_GROUND} />
+      {/* wraps the model's still portal so the gate keeps its living swirl */}
+      <mesh material={portal} position={GATE} renderOrder={1}><boxGeometry args={[0.095 * NETHER_HEIGHT, 0.186 * NETHER_HEIGHT, 0.02 * NETHER_HEIGHT]} /></mesh>
+      <sprite material={halo} position={GATE} scale={22} raycast={() => null} />
+      <pointLight ref={light} color={PORTAL} distance={32} decay={1.5} position={[GATE[0], GATE[1], 1]} />
+      <Label position={[0, 6, 0]} text={SECRET.name} sub="Undiscovered" color={PORTAL} onSelect={open} near={14} far={40} />
     </group>
   );
 }
@@ -481,6 +575,7 @@ export default function Landmarks() {
       <Observatory />
       <Beacon />
       <Darkroom />
+      <IslandBoards />
     </>
   );
 }

@@ -60,6 +60,8 @@ export const MODELS = {
   tholos: '/world/models/tholos.glb', // diorama base, pond and trees stripped
   cypress: '/world/models/cypress.glb',
   allay: '/world/models/allay.glb', // player avatar
+  citadel: '/world/models/citadel.glb',
+  netherIsland: '/world/models/nether_island.glb', // the Darkroom, rock and all
 };
 
 export const CREDITS = [
@@ -69,6 +71,8 @@ export const CREDITS = [
   { what: 'Greek Tholos', who: 'Nicole (nicolioos)', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/b4fbe06384ba439e93643fc8818e5da4' },
   { what: 'Allay (redesigned)', who: 'Master Galanodel', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/65a09bda6056476fa333d9cd4bed5920' },
   { what: 'Cypress tree', who: 'ElectroNick', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/249d8cb553a8469e9d645713f8e96ed1' },
+  { what: 'Fantastic castle', who: 'lepkarepka', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/08a018e4e7b3486dbec7b0341be3aeb4' },
+  { what: 'Nether Island', who: 'Le.Anh', license: 'CC BY 4.0', url: 'https://sketchfab.com/3d-models/a959148d1074416d943bdc6b7f722b46' },
 ];
 
 export const assetUrl = (key) => (ASSETS[key]?.ready ? ASSETS[key].path : null);

@@ -103,7 +103,7 @@ function CaseStudy({ slug }) {
 function Experience() {
   return (
     <>
-      <p className="pl-lead">Six levels, climbed from the ground up. Hover a level to light its tier on the Citadel.</p>
+      <p className="pl-lead">Six levels, climbed from the outer ring in. Hover a level to light its ring around the Citadel.</p>
       <ol className="pl-levels">
         {EXPERIENCE.map((e, k) => (
           <li key={e.id} onMouseEnter={() => setState({ focus: e.id })} onMouseLeave={() => setState({ focus: null })}
@@ -171,7 +171,7 @@ function Darkroom() {
   );
 }
 
-const TITLES = { about: 'About', projects: 'Selected projects', experience: 'Experience', research: 'Research', contact: 'Contact', darkroom: 'The Darkroom' };
+const TITLES = { about: 'About', projects: 'Selected projects', experience: 'Experience', research: 'Research', contact: 'Contact', darkroom: 'A different dimension' };
 
 export default function Panel() {
   const panel = useWorld((s) => s.panel);

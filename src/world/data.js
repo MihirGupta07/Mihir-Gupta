@@ -10,7 +10,7 @@ export const ISLANDS = [
   { id: 'citadel', x: -32, z: -82, y: 2, r: 13, seed: 4 },
   { id: 'observatory', x: 44, z: -92, y: 9, r: 9, seed: 5 },
   { id: 'beacon', x: 4, z: -138, y: 3, r: 10, seed: 6 },
-  { id: 'darkroom', x: -112, z: 18, y: 14, r: 5, seed: 7 }, // hidden; reward for wandering west
+  { id: 'darkroom', x: -112, z: 18, y: 14, r: 7, seed: 7 }, // hidden; reward for wandering west. Its ground is a model, see Landmarks
   // decorative islets
   { id: 'd1', x: 22, z: 22, y: -3, r: 5, seed: 11 },
   { id: 'd2', x: -24, z: 14, y: -5, r: 4, seed: 12 },
@@ -39,7 +39,7 @@ export const DESTINATIONS = [
 ];
 export const destById = Object.fromEntries(DESTINATIONS.map((d) => [d.id, d]));
 
-export const SECRET = { id: 'darkroom', name: 'The Darkroom', island: 'darkroom', color: '#F4B892' };
+export const SECRET = { id: 'darkroom', name: 'A different dimension', island: 'darkroom', color: '#F4B892' };
 
 // One hue per project — art direction only.
 const PROJECT_HUES = ['#7FD8FF', '#FFB86B', '#FF7FA8', '#9BE37F', '#FFD36B', '#C59BFF', '#6FE3D6', '#7FFFD0', '#FF9A7A', '#A8C7FF', '#FFC2D4'];
@@ -84,10 +84,10 @@ export function groundAt(x, z) {
 
 // Solid things the player slides around: [x, z, radius]
 export const COLLIDERS = [
-  [islandById.tower.x, islandById.tower.z, 5.5],
-  [islandById.citadel.x, islandById.citadel.z, 7.5],
+  [islandById.tower.x, islandById.tower.z, 2.6],
+  [islandById.citadel.x, islandById.citadel.z, 7],
   [islandById.observatory.x, islandById.observatory.z, 4.6],
-  [islandById.beacon.x, islandById.beacon.z, 3.4],
+  [islandById.beacon.x, islandById.beacon.z, 1.6],
   [nexus.x, nexus.z, 3.2],
   ...PEDESTALS.map((p) => [p.x, p.z, 1.1]),
 ];

@@ -42,7 +42,7 @@ export default function Islands({ quality }) {
   const { meshes, material } = useMemo(() => {
     const rock = rockMaterial(), moss = mossMaterial();
     const material = moss ? [rock, moss] : rock;
-    const meshes = ISLANDS.map((i) => ({ i, geo: islandGeometry(i.r, i.seed) }));
+    const meshes = ISLANDS.filter((i) => i.id !== 'darkroom').map((i) => ({ i, geo: islandGeometry(i.r, i.seed) }));
     return { meshes, material };
   }, []);
 
@@ -65,7 +65,7 @@ function Flora() {
     const rnd = seeded(99);
     const cypress = [], boulders = [];
     for (const i of ISLANDS) {
-      if (i.id === 'nexus') continue;
+      if (i.id === 'nexus' || i.id === 'darkroom') continue;
       const n = i.id.startsWith('d') ? 4 : 5;
       for (let k = 0; k < n; k++) {
         const a = rnd() * Math.PI * 2, d = i.r * (0.62 + rnd() * 0.3);
