@@ -31,7 +31,7 @@
   body {
     @apply bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100;
     @apply transition-colors duration-300;
-    font-family: 'Monocraft', ui-monospace, monospace;
+    font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
     font-kerning: normal;
     font-optical-sizing: auto;
     line-height: 1.65;
@@ -39,6 +39,10 @@
     text-rendering: optimizeLegibility;
   }
   
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Monocraft', ui-monospace, monospace;
+  }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;

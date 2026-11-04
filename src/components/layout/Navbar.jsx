@@ -51,7 +51,7 @@ const Navbar = () => {
             className="cursor-pointer"
             onClick={() => smoothScrollTo('home')}
           >
-            <span className="text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+            <span className="font-display text-base font-semibold text-neutral-900 dark:text-neutral-100">
               {PERSONAL_INFO.name}
             </span>
           </motion.div>

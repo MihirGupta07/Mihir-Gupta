@@ -35,46 +35,46 @@ typography:
     fontWeight: 500
     lineHeight: 1.15
   body:
-    fontFamily: "'Monocraft', ui-monospace, monospace"
+    fontFamily: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.7
   lead:
-    fontFamily: "'Monocraft', ui-monospace, monospace"
+    fontFamily: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 400
     lineHeight: 1.55
   body-lg:
-    fontFamily: "'Monocraft', ui-monospace, monospace"
+    fontFamily: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
     lineHeight: 1.7
   body-sm:
-    fontFamily: "'Monocraft', ui-monospace, monospace"
+    fontFamily: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.9375rem"
     fontWeight: 400
     lineHeight: 1.6
   chip:
-    fontFamily: "'Monocraft', ui-monospace, monospace"
+    fontFamily: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.8125rem"
     fontWeight: 500
     lineHeight: 1.3
   label:
-    fontFamily: "'Monocraft', ui-monospace, monospace"
+    fontFamily: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.75rem"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "0.14em"
     textTransform: uppercase
   label-sm:
-    fontFamily: "'Monocraft', ui-monospace, monospace"
+    fontFamily: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.6875rem"
     fontWeight: 600
     lineHeight: 1.2
     letterSpacing: "0.12em"
     textTransform: uppercase
   data:
-    fontFamily: "'Monocraft', ui-monospace, monospace"
+    fontFamily: "'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.75rem"
     fontWeight: 400
     lineHeight: 1.4
@@ -149,7 +149,7 @@ The system rejects three looks: the generic teal/purple SaaS portfolio (gradient
 
 **Key Characteristics:**
 - A live 3D scene is the background. The UI floats over it as translucent ink.
-- One family: Monocraft at 400–600, upright only. Hierarchy comes from size, weight and case, never from a second face.
+- Two families with fixed jobs: Monocraft for headings, Hanken Grotesk for everything else. Upright only, weights 400–600.
 - Ember is the one global accent, and each destination brings its own place tint.
 - Hairline rules and small radii. Borders do the work that boxes would.
 - Motion is slow and settles; nothing bounces.
@@ -183,11 +183,12 @@ Each destination sets `--c` on its panel and HUD prompt. The tint drives the pan
 
 ## 3. Typography
 
-**Font:** Monocraft (fallback: ui-monospace, monospace)
+**Headings:** Monocraft (fallback: ui-monospace, monospace)
+**Everything else:** Hanken Grotesk (fallback: ui-sans-serif, system-ui, sans-serif)
 
-One family is loaded, as a single variable file covering weights 400–600. No italic, no second family.
+Both are self-hosted: Monocraft as two subset files (400, 600) and Hanken Grotesk as one variable Latin file. No italic, no third family.
 
-**Character:** A blocky, Minecraft-like pixel face, set with care. It makes the world read as a built place, made block by block, while keeping body copy readable at 1rem and above. The craft is in restraint: one face, three weights, generous line-height, and no letter-spacing tricks that collide pixel edges.
+**Character:** Monocraft is a blocky, Minecraft-like pixel face that makes the world read as a built place, made block by block. Its fixed-width letters are slow to read in long text, so Hanken Grotesk, a calm proportional grotesque, carries prose, labels and data. The craft is in restraint: two faces with fixed jobs, three weights, and no letter-spacing tricks that collide pixel edges.
 
 ### Hierarchy
 - **Display** (500, `clamp(3.4rem, 8vw, 6rem)`, line-height 0.95, no tracking): the hero name only. A soft twilight text-shadow lifts it off the scene.
@@ -195,10 +196,10 @@ One family is loaded, as a single variable file covering weights 400–600. No i
 - **Title** (500, 1.5–2.2rem): project names, role titles, paper titles, stat values, tour and onboarding headings.
 - **Body** (400, 1rem, line-height 1.7, Parchment Body): panel prose, capped at about 60ch by the panel width. The lead paragraph steps up to 1.125rem/1.55; lists run at 0.9375rem/1.6.
 - **Label** (600, 0.75rem, 0.12–0.14em tracking, uppercase): nav, buttons, eyebrows, section heads, HUD prompts, world-label subtitles. Label Small (0.6875rem) is for the densest chrome.
-- **Data** (400, 0.75rem, tabular numbers): dates, tour step numbers, level indices, key caps.
+- **Data** (400, 0.75rem): dates, tour step numbers, level indices, key caps. Hanken Grotesk has no tabular figures, so `tabular-nums` has no effect on this role; do not rely on digits aligning in columns.
 
 ### Named Rules
-**The One Face Rule.** Monocraft at 400/500/600 is the whole type kit. A new weight, style or family needs a reason that size, weight and case cannot meet. Data gets `tabular-nums`, not a monospace.
+**The Two Jobs Rule.** Monocraft sets display, headline and title roles; Hanken Grotesk sets everything else, at 400/500/600. Never swap their jobs. A new weight, style or family needs a reason that size, weight and case cannot meet.
 
 **The Pixel Grid Rule.** Never slant, condense, or apply negative tracking to the pixel face; synthesized italics and tight tracking smear the grid. Emphasis is weight 600 or Ember, never italic.
 

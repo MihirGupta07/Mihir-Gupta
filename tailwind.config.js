@@ -53,7 +53,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Monocraft', 'ui-monospace', 'monospace'],
+        sans: ['Hanken Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Monocraft', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         // Fluid display scale — perfect fourth (×1.333), clamp() for smooth viewport scaling
