@@ -19,6 +19,7 @@ import caloImage from './calo.png';
 import wizsyncImage from './wizsync.png';
 import luceImage from './luce.png';
 import beatrunnerImage from './beatrunner.png';
+import vowsImage from './vows.png';
 export {
   mihirPhoto,
   backgroundImage,
@@ -39,4 +40,5 @@ export {
   wizsyncImage,
   luceImage,
   beatrunnerImage,
+  vowsImage,
 };

@@ -252,14 +252,15 @@ Disney castles, cyberpunk neon signage.
 - **Filename / path:** `public/world/ui/project_glyphs_atlas.png`
 - **Where:** A small emblem hovering above each pedestal in the Nexus.
 - **Purpose:** Gives each project a distinct visual identity readable from a distance.
-- **Type:** Alpha-transparent sprite atlas, 4 columns × 3 rows (10 used, 2 spare), white line art (the app
+- **Type:** Alpha-transparent sprite atlas, 4 columns × 3 rows (11 used, 1 spare), white line art (the app
   tints it).
 - **Cell order (must match `PROJECTS` order in `src/data/constants.js`):**
   1 WiZ Sync: light bulb emitting sound waves · 2 Luce: microphone merged with a kanban card ·
   3 Beat Runner: running figure on a waveform · 4 GeoHide: map pin hidden behind a street corner ·
   5 calo: bowl with a leaf and a small chart · 6 Kairos: hourglass over a route line ·
   7 GitWizz: branching commit graph with a star · 8 Cashira: coin inside an offline cloud ·
-  9 Wrapshare: rolled-up story card with a music note · 10 Qestra: three linked nodes under a shield.
+  9 Wrapshare: rolled-up story card with a music note · 10 Qestra: three linked nodes under a shield ·
+  11 vows.rsvp: envelope under a small heart (drawn in by script, not generated).
 - **Prompt:**
   > A 4 by 3 grid of minimal monoline icons, pure white 3px strokes on a fully transparent background,
   > each icon centred in its cell with wide margins, consistent stroke weight and visual size, geometric,

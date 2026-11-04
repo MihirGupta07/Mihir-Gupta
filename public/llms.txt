@@ -35,6 +35,7 @@ Tools: Git, AWS, Docker, Figma.
 - GitWizz (https://git-wizz.vercel.app): interactive Git learning platform with a D3.js commit-graph engine and guardrailed AI tutor.
 - Wrapshare (https://github.com/MihirGupta07/wrapshare): on-demand Spotify Wrapped-style recaps with Razorpay payments.
 - Qestra (https://github.com/MihirGupta07/Qestra): governed multi-agent AI orchestrator with approval-gated execution and audit trails.
+- vows.rsvp (https://www.vows.rsvp): digital wedding invitation platform with ten destination-inspired design worlds, guest-specific invitation links and per-event RSVP.
 
 ## Research
 

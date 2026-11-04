@@ -42,7 +42,7 @@ export const destById = Object.fromEntries(DESTINATIONS.map((d) => [d.id, d]));
 export const SECRET = { id: 'darkroom', name: 'The Darkroom', island: 'darkroom', color: '#F4B892' };
 
 // One hue per project — art direction only.
-const PROJECT_HUES = ['#7FD8FF', '#FFB86B', '#FF7FA8', '#9BE37F', '#FFD36B', '#C59BFF', '#6FE3D6', '#7FFFD0', '#FF9A7A', '#A8C7FF'];
+const PROJECT_HUES = ['#7FD8FF', '#FFB86B', '#FF7FA8', '#9BE37F', '#FFD36B', '#C59BFF', '#6FE3D6', '#7FFFD0', '#FF9A7A', '#A8C7FF', '#FFC2D4'];
 const nexus = islandById.nexus;
 export const PEDESTALS = PROJECTS.map((p, i) => {
   const a = (i / PROJECTS.length) * Math.PI * 2 + Math.PI / 2;
