@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import posthog from 'posthog-js';
 import { ArrowDown, ArrowUp, Compass, HelpCircle, LayoutList, Map as MapIcon, Volume2, VolumeX } from 'lucide-react';
 import { PERSONAL_INFO } from '@/data/constants';
 import { useWorld, setState, getState, rig } from '../store';
@@ -8,7 +9,12 @@ import { setAudio } from '../audio';
 import { CREDITS } from '../assets/manifest';
 
 const TOUR = TOUR_STOPS;
-const startTour = () => tourGo(0);
+const startTour = () => {
+  if (import.meta.env.VITE_POSTHOG_KEY && import.meta.env.VITE_POSTHOG_HOST) {
+    posthog.capture('guided_tour_started');
+  }
+  tourGo(0);
+};
 
 // Bounds of the playable map, in world units
 const MAP = { x0: -125, x1: 62, z0: -152, z1: 30 };

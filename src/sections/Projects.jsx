@@ -1,11 +1,19 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import { PROJECTS, SOCIAL_LINKS } from '@/data/constants';
 import { staggerContainer, staggerItem } from '@/utils/animations';
 import Badge from '@/components/ui/Badge';
 
-const ProjectCard = ({ project, index }) => (
+const ProjectCard = ({ project, index }) => {
+  const trackProjectLink = (destination) => {
+    if (import.meta.env.VITE_POSTHOG_KEY && import.meta.env.VITE_POSTHOG_HOST) {
+      posthog.capture('project_link_opened', { project_id: project.id, destination });
+    }
+  };
+
+  return (
   <motion.div
     variants={staggerItem}
     className="group border border-neutral-200 dark:border-neutral-700 rounded-lg overflow-hidden hover:border-neutral-400 dark:hover:border-neutral-500 transition-colors duration-200"
@@ -50,6 +58,7 @@ const ProjectCard = ({ project, index }) => (
         {project.liveUrl && (
           <a
             href={project.liveUrl}
+            onClick={() => trackProjectLink('live_demo')}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-neutral-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -61,6 +70,7 @@ const ProjectCard = ({ project, index }) => (
         {project.githubUrl && (
           <a
             href={project.githubUrl}
+            onClick={() => trackProjectLink('source_code')}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
@@ -72,7 +82,8 @@ const ProjectCard = ({ project, index }) => (
       </div>
     </div>
   </motion.div>
-);
+  );
+};
 
 const Projects = () => {
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import posthog from 'posthog-js';
 import { motion } from 'framer-motion';
 import { ArrowDown, Download, ExternalLink, Github } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
@@ -17,7 +18,12 @@ const platformLabels = {
 const Hero = () => {
   const prefersReduced = useReducedMotion();
   const handleScrollDown = () => smoothScrollTo('about');
-  const handleDownloadResume = () => window.open(PERSONAL_INFO.resume, '_blank');
+  const handleDownloadResume = () => {
+    if (import.meta.env.VITE_POSTHOG_KEY && import.meta.env.VITE_POSTHOG_HOST) {
+      posthog.capture('resume_downloaded', { source: 'hero' });
+    }
+    window.open(PERSONAL_INFO.resume, '_blank');
+  };
   const handleViewProjects = () => smoothScrollTo('projects');
 
   return (

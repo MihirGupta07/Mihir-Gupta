@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import posthog from 'posthog-js';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Download } from 'lucide-react';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
@@ -28,6 +29,9 @@ const Navbar = () => {
   };
 
   const handleDownloadResume = () => {
+    if (import.meta.env.VITE_POSTHOG_KEY && import.meta.env.VITE_POSTHOG_HOST) {
+      posthog.capture('resume_downloaded', { source: 'navbar' });
+    }
     window.open(PERSONAL_INFO.resume, '_blank');
   };
 
