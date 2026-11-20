@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import posthog from 'posthog-js';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Send, CheckCircle, Github, Linkedin, Instagram, BookOpen } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -81,9 +82,23 @@ const Contact = () => {
       });
       if (!res.ok) throw new Error(`Discord webhook responded with ${res.status}`);
       toast.success("Message sent. I'll get back to you soon.");
+      if (import.meta.env.VITE_POSTHOG_KEY && import.meta.env.VITE_POSTHOG_HOST) {
+        posthog.capture('contact_form_submitted', { submission_method: 'discord_webhook' });
+        posthog.logger.info('contact form delivery completed', {
+          delivery_method: 'discord_webhook',
+          outcome: 'success',
+        });
+      }
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Discord webhook error:', error);
+      if (import.meta.env.VITE_POSTHOG_KEY && import.meta.env.VITE_POSTHOG_HOST) {
+        posthog.logger.error('contact form delivery failed', {
+          delivery_method: 'discord_webhook',
+          error_type: error instanceof Error ? error.name : 'unknown_error',
+          outcome: 'failure',
+        });
+      }
       toast.error('Failed to send message. Please try again or email me directly.');
     } finally {
       setIsSubmitting(false);

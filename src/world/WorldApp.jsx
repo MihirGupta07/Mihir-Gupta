@@ -1,4 +1,5 @@
 import { Component, useEffect } from 'react';
+import posthog from 'posthog-js';
 import { Toaster } from 'react-hot-toast';
 import { MotionConfig } from 'framer-motion';
 import World from './scene/World';
@@ -24,7 +25,16 @@ setState({ quality: detectQuality() });
 
 // If WebGL dies mid-session, drop to the classic site instead of a blank screen.
 class Boundary extends Component {
-  componentDidCatch(err) { console.error('World failed, falling back to classic site', err); this.props.onError(); }
+  componentDidCatch(err) {
+    console.error('World failed, falling back to classic site', err);
+    if (import.meta.env.VITE_POSTHOG_KEY && import.meta.env.VITE_POSTHOG_HOST) {
+      posthog.logger.error('3d world fallback activated', {
+        error_type: err instanceof Error ? err.name : 'unknown_error',
+        fallback_destination: 'classic_site',
+      });
+    }
+    this.props.onError();
+  }
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
   render() { return this.state.failed ? null : this.props.children; }
@@ -49,6 +59,12 @@ function enter() {
 export default function WorldApp({ onClassic }) {
   const quality = useWorld((s) => s.quality);
   const ready = useWorld((s) => s.ready);
+  const enterFromIntro = () => {
+    if (import.meta.env.VITE_POSTHOG_KEY && import.meta.env.VITE_POSTHOG_HOST) {
+      posthog.capture('world_entered');
+    }
+    enter();
+  };
 
   useEffect(() => {
     const onPop = () => {
@@ -80,7 +96,7 @@ export default function WorldApp({ onClassic }) {
             <World quality={quality} />
           </div>
         </Boundary>
-        <Hero onEnter={enter} />
+        <Hero onEnter={enterFromIntro} />
         <Hud onClassic={onClassic} />
         <Panel />
         <Loader />

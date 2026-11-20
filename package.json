@@ -19,6 +19,7 @@
     "gsap": "^3.13.0",
     "lucide-react": "^0.294.0",
     "ogl": "^1.0.11",
+    "posthog-js": "^1.453.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
